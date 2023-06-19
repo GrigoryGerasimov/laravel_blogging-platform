@@ -6,7 +6,8 @@
     <title>AdminLTE 3 | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -41,11 +42,19 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
         <div class="sidebar">
+            <ul class="pt-3 nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                        <i class="nav-icon fa-tree"></i>
+                        <p>Categories</p>
+                    </a>
+                </li>
+            </ul>
         </div>
         <!-- /.sidebar -->
     </aside>
 
-    @yield('admin-main-content')
+    @yield('admin-content')
 
     <footer class="main-footer">
         <strong>&copy; Blog</strong>
