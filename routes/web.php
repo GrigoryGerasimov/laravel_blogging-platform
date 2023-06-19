@@ -19,4 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['namespace' => 'App\Http\Controllers\Main'], function() {
+    Route::get('/', 'IndexController')->name('posts.index');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin\Main', 'prefix' => 'admin'], function() {
+    Route::get('/', 'IndexController')->name('admin.index');
+});
