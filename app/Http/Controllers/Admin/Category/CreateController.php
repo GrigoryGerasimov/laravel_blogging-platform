@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Main;
+namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class IndexController extends Controller
+class CreateController extends Controller
 {
     /**
      * @return View
      */
     public function __invoke(): View
     {
-        return view('main.index');
+        return view('admin.categories.create');
     }
 }
