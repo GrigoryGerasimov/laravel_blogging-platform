@@ -23,6 +23,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function() {
     Route::get('/', 'IndexController')->name('posts.index');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin\Main', 'prefix' => 'admin'], function() {
-    Route::get('/', 'IndexController')->name('admin.index');
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function() {
+    Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
+        Route::get('/', 'IndexController')->name('admin.categories.index');
+    });
+    Route::group(['namespace' => 'Main'], function() {
+        Route::get('/', 'IndexController')->name('admin.index');
+    });
 });
