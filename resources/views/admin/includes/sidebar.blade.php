@@ -7,6 +7,12 @@
                     <p>Categories</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.tag.index') }}" class="nav-link">
+                    <i class="nav-icon fa fa-solid fa-list"></i>
+                    <p>Tags</p>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

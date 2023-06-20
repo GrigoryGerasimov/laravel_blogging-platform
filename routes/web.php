@@ -34,6 +34,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
         Route::delete('/{category}', 'DestroyController')->name('admin.category.destroy');
         Route::get('/{category}/restore', 'RestoreController')->withTrashed()->name('admin.category.restore');
     });
+
+    Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function() {
+        Route::get('/', 'IndexController')->name('admin.tag.index');
+        Route::get('/create', 'CreateController')->name('admin.tag.create');
+        Route::post('/', 'StoreController')->name('admin.tag.store');
+        Route::get('/{tag}', 'ShowController')->name('admin.tag.show');
+        Route::get('/{tag}/edit', 'EditController')->name('admin.tag.edit');
+        Route::patch('/{tag}', 'UpdateController')->name('admin.tag.update');
+        Route::delete('/{tag}', 'DestroyController')->name('admin.tag.destroy');
+        Route::get('/{tag}/restore', 'RestoreController')->withTrashed()->name('admin.tag.restore');
+    });
+
     Route::group(['namespace' => 'Main'], function() {
         Route::get('/', 'IndexController')->name('admin.index');
     });

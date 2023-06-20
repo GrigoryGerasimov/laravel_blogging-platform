@@ -22,7 +22,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary">New Category</a>
+                        <a href="{{ route('admin.tag.create') }}" class="btn btn-primary">New Tag</a>
                     </div>
                 </div>
 
@@ -30,41 +30,41 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Categories</h3>
+                                <h3 class="card-title">Tags</h3>
                             </div>
 
-                            @if(!isset($categoriesList))
-                                <p class="p-3">No categories available</p>
+                            @if(!isset($tagsList))
+                                <p class="p-3">No tags available</p>
                             @else
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Category</th>
+                                            <th>Tag</th>
                                             <th colspan="3"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($categoriesList as $category)
+
+                                        @foreach($tagsList as $tag)
                                             <tr>
-                                                <td>{{ $category->id }}</td>
-                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $tag->id }}</td>
+                                                <td>{{ $tag->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.category.show', $category) }}"
+                                                    <a href="{{ route('admin.tag.show', $tag) }}"
                                                        class="text-dark">
                                                         <i class="fa fa-solid fa-file"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.category.edit', $category) }}"
+                                                    <a href="{{ route('admin.tag.edit', $tag) }}"
                                                        class="text-dark">
                                                         <i role="button" class="fa fa-solid fa-pen"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('admin.category.destroy', $category) }}"
-                                                          method="POST"
+                                                    <form action="{{ route('admin.tag.destroy', $tag) }}" method="POST"
                                                           enctype="application/x-www-form-urlencoded" class="text-dark">
                                                         @csrf
                                                         @method('delete')
