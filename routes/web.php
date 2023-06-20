@@ -46,6 +46,17 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
         Route::get('/{tag}/restore', 'RestoreController')->withTrashed()->name('admin.tag.restore');
     });
 
+    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
+        Route::get('/', 'IndexController')->name('admin.post.index');
+        Route::get('/create', 'CreateController')->name('admin.post.create');
+        Route::post('/', 'StoreController')->name('admin.post.store');
+        Route::get('/{post}', 'ShowController')->name('admin.post.show');
+        Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
+        Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
+        Route::delete('/{post}', 'DestroyController')->name('admin.post.destroy');
+        Route::get('/{post}/restore', 'RestoreController')->withTrashed()->name('admin.post.restore');
+    });
+
     Route::group(['namespace' => 'Main'], function() {
         Route::get('/', 'IndexController')->name('admin.index');
     });
