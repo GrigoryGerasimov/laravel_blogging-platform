@@ -11,15 +11,12 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-4 mb-4">
-                        <a href="{{ route('admin.tag.index') }}" class="text-dark">Back</a>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
+                                <a href="{{ route('admin.tag.index') }}" class="text-dark mr-4">
+                                    <i class="fas fa-angle-double-left"></i>
+                                </a>
                                 <h3 class="card-title">{{ $tag->name }}</h3>
                                 <div class="d-flex flex-grow-1 justify-content-end">
                                     <a href="{{ route('admin.tag.edit', $tag) }}" class="text-dark">
