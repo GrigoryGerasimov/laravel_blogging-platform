@@ -33,8 +33,8 @@
                                 <h3 class="card-title">Categories</h3>
                             </div>
 
-                            @if(!isset($categoriesList))
-                                <p class="p-3">No categories available</p>
+                            @if(!isset($categoriesList) || $categoriesList->isEmpty())
+                                <span class="p-3">No categories available</span>
                             @else
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap">
