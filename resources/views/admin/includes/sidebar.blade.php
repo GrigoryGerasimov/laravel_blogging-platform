@@ -3,7 +3,7 @@
         <ul class="pt-3 nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="{{ route('admin.post.index') }}" class="nav-link">
-                    <i class="nav-icon fa fa-solid fa-list"></i>
+                    <i class="nav-icon fas fa-comment-alt"></i>
                     <p>Posts</p>
                 </a>
             </li>
@@ -15,7 +15,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.tag.index') }}" class="nav-link">
-                    <i class="nav-icon fa fa-solid fa-list"></i>
+                    <i class="nav-icon fa fa-solid fa-tags"></i>
                     <p>Tags</p>
                 </a>
             </li>

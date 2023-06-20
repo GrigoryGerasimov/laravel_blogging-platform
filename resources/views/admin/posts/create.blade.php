@@ -17,45 +17,52 @@
                 <div class="row">
                     <div class="col-12">
                         <form action="{{ route('admin.post.store') }}" method="POST" class="form"
-                              enctype="application/x-www-form-urlencoded">
+                              enctype="multipart/form-data">
                             @csrf
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input name="title" class="form-control" id="title" placeholder="Post Title"
+                                    <input name="title" class="form-control @error('title') is-invalid @enderror"
+                                           id="title" placeholder="Post Title"
                                            value="{{ @old('title') }}">
                                     @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="img">Image</label>
+                                    <label for="img">Preview Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="img">
-                                            <label class="custom-file-label" for="img">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                            <input type="file" class="custom-file-input" id="preview_img"
+                                                   name="preview_img">
+                                            <label class="custom-file-label" for="preview_img">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="file">File</label>
+                                    <label for="file">Main Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="file">
-                                            <label class="custom-file-label" for="file">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                            <input type="file" class="custom-file-input" id="main_img" name="main_img">
+                                            <label class="custom-file-label" for="main_img">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="category_id">Category</label>
+                                    <select id="category_id" name="category_id" class="form-control">
+                                        @foreach($categoriesList as $category)
+                                            <option
+                                                value="{{ $category->id }}" {{ old('category_id') === $category->id && "selected" }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group col-11">
                                 <label for="summernote">Content</label>
-                                <textarea id="summernote" name="content"></textarea>
+                                <textarea id="summernote" name="content"
+                                          class="@error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                                 @error('content')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

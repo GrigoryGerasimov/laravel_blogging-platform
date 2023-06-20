@@ -17,8 +17,9 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request): RedirectResponse
     {
         $post = $request->validated();
-        $post['img'] = Storage::put('img', $post['img']);
-        $post['file'] = Storage::put('file', $post['file']);
+
+        $post['preview_img'] = Storage::put('images/preview', $post['preview_img']);
+        $post['main_img'] = Storage::put('images/main', $post['main_img']);
 
         Post::firstOrCreate($post);
 
