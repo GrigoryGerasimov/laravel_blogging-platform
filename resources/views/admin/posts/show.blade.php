@@ -48,8 +48,14 @@
                                         <td>{{ $post->content }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Post Category</th>
+                                        <th>Category</th>
                                         <td>{{ $post->category->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tags</th>
+                                        <td>
+                                            {{ trim($post->tags->reduce(fn($acc, $val) => $acc . ', ' . $val->name), ',') }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Preview Image</th>

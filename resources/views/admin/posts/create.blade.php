@@ -30,23 +30,33 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="img">Preview Image</label>
+                                    <label for="preview_img">Preview Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="preview_img"
+                                            <input type="file"
+                                                   class="custom-file-input @error('preview_img') is-invalid @enderror"
+                                                   id="preview_img"
                                                    name="preview_img">
                                             <label class="custom-file-label" for="preview_img">Choose file</label>
                                         </div>
                                     </div>
+                                    @error('preview_img')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="file">Main Image</label>
+                                    <label for="main_img">Main Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="main_img" name="main_img">
+                                            <input type="file"
+                                                   class="custom-file-input @error('main_img') is-invalid @enderror"
+                                                   id="main_img" name="main_img">
                                             <label class="custom-file-label" for="main_img">Choose file</label>
                                         </div>
                                     </div>
+                                    @error('main_img')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
@@ -57,12 +67,25 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="tag_ids">Tags</label>
+                                    <select id="tag_ids" name="tag_ids[]"
+                                            class="select2 @error('tag_ids') is-invalid @enderror" multiple="multiple"
+                                            data-placeholder="Select a Tag" style="width: 100%;">
+                                        @foreach($tagsList as $tag)
+                                            <option
+                                                value="{{ $tag->id }}" {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tag_ids')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-group col-11">
                                 <label for="summernote">Content</label>
-                                <textarea id="summernote" name="content"
-                                          class="@error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+                                <textarea id="summernote" name="content">{{ old('content') }}</textarea>
                                 @error('content')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
