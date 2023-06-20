@@ -24,9 +24,11 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'bail|required|string|unique:posts',
             'content' => 'bail|required|string',
-            'category_id' => 'integer',
-            'preview_img' => 'file',
-            'main_img' => 'file'
+            'category_id' => 'bail|required|integer|exists:categories,id',
+            'preview_img' => 'bail|required|file',
+            'main_img' => 'bail|required|file',
+            'tag_ids' => 'bail|required|array',
+            'tag_ids.*' => 'bail|required|integer|exists:tags,id'
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\{Category, Tag};
 use Illuminate\View\View;
 
 class CreateController extends Controller
@@ -14,7 +14,8 @@ class CreateController extends Controller
     public function __invoke(): View
     {
         $categoriesList = Category::all();
+        $tagsList = Tag::all();
 
-        return view('admin.posts.create', compact('categoriesList'));
+        return view('admin.posts.create', compact('categoriesList', 'tagsList'));
     }
 }
