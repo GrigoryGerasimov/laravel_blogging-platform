@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.category.index') }}" class="text-dark">Back</a>
+                        <a href="{{ route('admin.post.index') }}" class="text-dark">Back</a>
                     </div>
                 </div>
 
@@ -20,12 +20,12 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h3 class="card-title">{{ $category->name }}</h3>
+                                <h3 class="card-title">{{ $post->title }}</h3>
                                 <div class="d-flex flex-grow-1 justify-content-end">
-                                    <a href="{{ route('admin.category.edit', $category) }}" class="text-dark">
+                                    <a href="{{ route('admin.post.edit', $post) }}" class="text-dark">
                                         <i role="button" class="fa fa-solid fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('admin.category.destroy', $category) }}" method="POST"
+                                    <form action="{{ route('admin.post.destroy', $post) }}" method="POST"
                                           enctype="application/x-www-form-urlencoded" class="text-dark ml-5">
                                         @csrf
                                         @method('delete')
@@ -40,19 +40,27 @@
                                     <tbody>
                                     <tr>
                                         <th>ID</th>
-                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $post->id }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Category</th>
-                                        <td>{{ $category->name }}</td>
+                                        <th>Title</th>
+                                        <td>{{ $post->title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Content</th>
+                                        <td>{{ $post->content }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Post Category</th>
+                                        <td>{{ $post->category_id }}</td>
                                     </tr>
                                     <tr>
                                         <th>Created At</th>
-                                        <td>{{ $category->created_at }}</td>
+                                        <td>{{ $post->created_at }}</td>
                                     </tr>
                                     <tr>
                                         <th>Updated At</th>
-                                        <td>{{ $category->updated_at }}</td>
+                                        <td>{{ $post->updated_at }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
