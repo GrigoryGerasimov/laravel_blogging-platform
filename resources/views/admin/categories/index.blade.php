@@ -38,9 +38,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Category</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th colspan="3"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -53,13 +51,26 @@
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>
-                                                <i class="fa fa-solid fa-file"></i>
+                                                <a href="{{ route('admin.category.show', $category) }}"
+                                                   class="text-dark">
+                                                    <i class="fa fa-solid fa-file"></i>
+                                                </a>
                                             </td>
                                             <td>
-                                                <i class="fa fa-solid fa-pen"></i>
+                                                <a href="{{ route('admin.category.edit', $category) }}"
+                                                   class="text-dark">
+                                                    <i role="button" class="fa fa-solid fa-pen"></i>
+                                                </a>
                                             </td>
                                             <td>
-                                                <i class="fa fa-solid fa-trash"></i>
+                                                <form action="{{ route('admin.category.destroy', $category) }}" method="POST"
+                                                      enctype="application/x-www-form-urlencoded" class="text-dark">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i role="button" class="fa fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
