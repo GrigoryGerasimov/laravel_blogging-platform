@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Categories</h3>
@@ -38,9 +38,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Category</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -52,15 +51,8 @@
                                         <tr>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
-                                            <td>
-                                                <i class="fa fa-solid fa-file"></i>
-                                            </td>
-                                            <td>
-                                                <i class="fa fa-solid fa-pen"></i>
-                                            </td>
-                                            <td>
-                                                <i class="fa fa-solid fa-trash"></i>
-                                            </td>
+                                            <td>{{ $category->created_at }}</td>
+                                            <td>{{ $category->updated_at }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -73,3 +65,4 @@
         </section>
     </div>
 @endsection
+
