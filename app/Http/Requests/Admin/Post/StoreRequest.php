@@ -24,7 +24,9 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'bail|required|string|unique:posts',
             'content' => 'bail|required|string',
-            'category_id' => 'integer'
+            'category_id' => 'integer',
+            'preview_img' => 'file',
+            'main_img' => 'file'
         ];
     }
 }

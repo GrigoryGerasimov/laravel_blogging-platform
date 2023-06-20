@@ -30,7 +30,7 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Tags</h3>
+                                <h3 class="card-title">Posts</h3>
                             </div>
 
                             @if(!isset($postsList) || $postsList->isEmpty())

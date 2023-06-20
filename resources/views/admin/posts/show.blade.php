@@ -52,7 +52,15 @@
                                     </tr>
                                     <tr>
                                         <th>Post Category</th>
-                                        <td>{{ $post->category_id }}</td>
+                                        <td>{{ $post->category->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Preview Image</th>
+                                        <td>{{ $post->preview_img }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Main Image</th>
+                                        <td>{{ $post->main_img }}</td>
                                     </tr>
                                     <tr>
                                         <th>Created At</th>
