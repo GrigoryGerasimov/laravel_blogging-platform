@@ -8,9 +8,7 @@ use App\Http\Services\Service;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{DB, Log, Storage};
 
 final class PostService extends Service
 {
@@ -75,6 +73,13 @@ final class PostService extends Service
             DB::beginTransaction();
 
             $isDeleted = $model->delete();
+
+            if (Storage::disk('public')->exists($model->preview_img)) {
+                Storage::disk('public')->delete($model->preview_img);
+            }
+            if (Storage::disk('public')->exists($model->main_img)) {
+                Storage::disk('public')->delete($model->main_img);
+            }
 
             DB::commit();
 
