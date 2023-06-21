@@ -11,7 +11,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <a href="{{ route('admin.post.index') }}" class="text-dark mr-4">
@@ -59,11 +59,15 @@
                                     </tr>
                                     <tr>
                                         <th>Preview Image</th>
-                                        <td>{{ $post->preview_img }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-size-64" alt="preview_image" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Main Image</th>
-                                        <td>{{ $post->main_img }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $post->main_img) }}" class="img-size-64" alt="main_image"/>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Created At</th>

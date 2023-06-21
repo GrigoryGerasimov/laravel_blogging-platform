@@ -34,6 +34,7 @@
                                 <div class="form-group">
                                     <label for="img">Preview Image</label>
                                     <div class="input-group">
+                                        <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-md" alt="current_preview_img"/>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="preview_img"
                                                    name="preview_img">
@@ -44,6 +45,7 @@
                                 <div class="form-group">
                                     <label for="file">Main Image</label>
                                     <div class="input-group">
+                                        <img src="{{ asset('storage/' . $post->main_img) }}" class="img-md" alt="current_main_img"/>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="main_img" name="main_img">
                                             <label class="custom-file-label" for="main_img">Choose file</label>
@@ -55,9 +57,23 @@
                                     <select id="category_id" name="category_id" class="form-control">
                                         @foreach($categoriesList as $category)
                                             <option
-                                                value="{{ $category->id }}" {{ $post->category->id == $category->id ? "selected" : "" }}>{{ $category->name }}</option>
+                                                value="{{ $category->id }}" {{ (old('category_id') ?? $post->category->id == $category->id) ? "selected" : "" }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag_ids">Tags</label>
+                                    <select id="tag_ids" name="tag_ids[]"
+                                            class="select2 @error('tag_ids') is-invalid @enderror" multiple="multiple"
+                                            data-placeholder="Select a Tag" style="width: 100%;">
+                                        @foreach($tagsList as $tag)
+                                            <option
+                                                value="{{ $tag->id }}" {{ (old('tag_ids') ?? is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tag_ids')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
