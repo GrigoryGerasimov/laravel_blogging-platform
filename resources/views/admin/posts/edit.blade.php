@@ -34,7 +34,10 @@
                                 <div class="form-group">
                                     <label for="img">Preview Image</label>
                                     <div class="input-group">
-                                        <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-md" alt="current_preview_img"/>
+                                        @if(Storage::disk('public')->exists($post->preview_img))
+                                            <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-md"
+                                                 alt="current_preview_img"/>
+                                        @endif
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="preview_img"
                                                    name="preview_img">
@@ -45,7 +48,10 @@
                                 <div class="form-group">
                                     <label for="file">Main Image</label>
                                     <div class="input-group">
-                                        <img src="{{ asset('storage/' . $post->main_img) }}" class="img-md" alt="current_main_img"/>
+                                        @if(Storage::disk('public')->exists($post->main_img))
+                                            <img src="{{ asset('storage/' . $post->main_img) }}" class="img-md"
+                                                 alt="current_main_img"/>
+                                        @endif
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="main_img" name="main_img">
                                             <label class="custom-file-label" for="main_img">Choose file</label>
@@ -68,7 +74,11 @@
                                             data-placeholder="Select a Tag" style="width: 100%;">
                                         @foreach($tagsList as $tag)
                                             <option
-                                                value="{{ $tag->id }}" {{ (old('tag_ids') ?? is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                                value="{{ $tag->id }}"
+                                                {{ (is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids'))) || (is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}
+                                            >
+                                                {{ $tag->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('tag_ids')

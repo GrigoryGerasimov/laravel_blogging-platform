@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Requests\Admin\Post\StoreRequest;
+use App\Http\Requests\Admin\User\StoreRequest;
 use Illuminate\Http\RedirectResponse;
 
 class StoreController extends BaseController
@@ -15,6 +15,6 @@ class StoreController extends BaseController
     {
         $this->service->store($request);
 
-        return redirect()->route('admin.post.index');
+        return redirect()->route('admin.user.index');
     }
 }

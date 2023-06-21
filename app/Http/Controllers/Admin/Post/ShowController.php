@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\View\View;
 
-class ShowController extends Controller
+class ShowController extends BaseController
 {
     /**
      * @param Post $post

@@ -25,4 +25,16 @@ class UpdateRequest extends FormRequest
             'name' => 'bail|required|string|unique:categories'
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Category name is mandatory',
+            'name.string' => 'Category name must be of string type',
+            'name.unique:tags' => 'Category name must be unique'
+        ];
+    }
 }

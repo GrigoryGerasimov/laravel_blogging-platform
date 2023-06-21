@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Http\Controllers\Controller;
 use App\Models\{Post, Category, Tag};
 use Illuminate\View\View;
 
-class EditController extends Controller
+class EditController extends BaseController
 {
     /**
      * @param Post $post

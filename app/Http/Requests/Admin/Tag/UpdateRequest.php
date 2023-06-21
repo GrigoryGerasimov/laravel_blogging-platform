@@ -25,4 +25,16 @@ class UpdateRequest extends FormRequest
             'name' => 'bail|required|string|unique:tags'
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Tag name is mandatory',
+            'name.string' => 'Tag name must be of string type',
+            'name.unique:tags' => 'Tag name must be unique'
+        ];
+    }
 }

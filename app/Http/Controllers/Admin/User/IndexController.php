@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Admin\User;
 
-use App\Models\Post;
+use App\Models\User;
 use Illuminate\View\View;
 
 class IndexController extends BaseController
@@ -12,8 +12,8 @@ class IndexController extends BaseController
      */
     public function __invoke(): View
     {
-        $postsList = Post::all();
+        $usersList = User::all();
 
-        return view('admin.posts.index', compact('postsList'));
+        return view('admin.users.index', compact('usersList'));
     }
 }
