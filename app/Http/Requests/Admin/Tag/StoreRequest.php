@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
         return [
             'name.required' => 'Tag name is mandatory',
             'name.string' => 'Tag name must be of string type',
-            'name.unique:tags' => 'Tag name must be unique'
+            'name.unique' => 'Tag name must be unique'
         ];
     }
 }

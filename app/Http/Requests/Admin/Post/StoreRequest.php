@@ -40,12 +40,12 @@ class StoreRequest extends FormRequest
         return [
             'title.required' => 'Post title is mandatory',
             'title.string' => 'Post title must be a text',
-            'title.unique:posts' => 'Post title must be unique',
+            'title.unique' => 'Post title must be unique',
             'content.required' => 'Post content is mandatory',
             'content.string' => 'Post content must be a text',
             'category_id.required' => 'Post must be allocated to a category',
             'category_id.integer' => 'Post category id must be an integer',
-            'category_id.exists:categories,id' => 'Post category id does not exist',
+            'category_id.exists' => 'Post category id does not exist',
             'preview_img.required' => 'Preview image is mandatory',
             'preview_img.file' => 'Preview image must be a file',
             'main_img.required' => 'Preview image is mandatory',
@@ -54,7 +54,7 @@ class StoreRequest extends FormRequest
             'tag_ids.array' => 'Post tags collection must be an integer data array',
             'tag_ids.*.required' => 'Post tags collection must consist of tags',
             'tag_ids.*.integer' => 'Post tags in tags collection must be of integer type',
-            'tag_ids.*.exists:tags,id' => 'Post tags do not exist'
+            'tag_ids.*.exists' => 'Post tags do not exist'
         ];
     }
 }
