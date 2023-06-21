@@ -34,7 +34,7 @@ class UpdateRequest extends FormRequest
         return [
             'name.required' => 'Category name is mandatory',
             'name.string' => 'Category name must be of string type',
-            'name.unique:tags' => 'Category name must be unique'
+            'name.unique' => 'Category name must be unique'
         ];
     }
 }

@@ -38,7 +38,7 @@ class StoreRequest extends FormRequest
             'name.string' => 'User name must be a text',
             'email.required' => 'User email is mandatory',
             'email.email' => 'User email must be a valid email address',
-            'email.unique:users' => 'User email must be unique',
+            'email.unique' => 'User email must be unique',
             'password.required' => 'User password is mandatory',
             'password.string' => 'User password must be of string type'
         ];
