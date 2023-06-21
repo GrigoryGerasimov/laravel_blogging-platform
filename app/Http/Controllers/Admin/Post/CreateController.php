@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Http\Controllers\Controller;
 use App\Models\{Category, Tag};
 use Illuminate\View\View;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     /**
      * @return View

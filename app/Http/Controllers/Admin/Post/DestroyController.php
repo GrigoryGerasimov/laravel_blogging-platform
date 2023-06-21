@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     /**
      * @param Post $post
@@ -14,8 +13,8 @@ class DestroyController extends Controller
      */
     public function __invoke(Post $post): RedirectResponse
     {
-        $post->delete();
+        $isDeleted = $this->service->delete($post);
 
-        return redirect()->route('admin.post.index');
+        return $isDeleted ? redirect()->route('admin.post.index') : redirect()->back();
     }
 }

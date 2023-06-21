@@ -63,7 +63,11 @@
                                     <select id="category_id" name="category_id" class="form-control">
                                         @foreach($categoriesList as $category)
                                             <option
-                                                value="{{ $category->id }}" {{ old('category_id') === $category->id && "selected" }}>{{ $category->name }}</option>
+                                                value="{{ $category->id }}"
+                                                {{ old('category_id') === $category->id && "selected" }}
+                                            >
+                                                {{ $category->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -74,7 +78,11 @@
                                             data-placeholder="Select a Tag" style="width: 100%;">
                                         @foreach($tagsList as $tag)
                                             <option
-                                                value="{{ $tag->id }}" {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                                value="{{ $tag->id }}"
+                                                {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? 'selected' : '' }}
+                                            >
+                                                {{ $tag->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('tag_ids')
