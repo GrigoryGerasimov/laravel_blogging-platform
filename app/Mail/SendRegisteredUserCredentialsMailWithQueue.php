@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\{Address, Content, Envelope};
 use Illuminate\Queue\SerializesModels;
 
-class SendRegisteredUserCredentialsMail extends Mailable
+class SendRegisteredUserCredentialsMailWithQueue extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
