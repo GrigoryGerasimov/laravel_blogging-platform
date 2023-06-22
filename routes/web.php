@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function() {
     Route::get('/', 'IndexController')->name('post.index');
