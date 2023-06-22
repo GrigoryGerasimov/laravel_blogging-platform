@@ -52,6 +52,18 @@
                                         <td>{{ $user->password }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Role(s)</th>
+                                        <td>{{ !$user->roles->isEmpty() ? trim($user->roles->reduce(fn($acc, $val) => $acc . ', ' . $val->name), ',') : 'No roles assigned to user' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Password</th>
+                                        <td>{{ $user->password }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email Verified At</th>
+                                        <td>{{ $user->email_verified_at }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Created At</th>
                                         <td>{{ $user->created_at }}</td>
                                     </tr>

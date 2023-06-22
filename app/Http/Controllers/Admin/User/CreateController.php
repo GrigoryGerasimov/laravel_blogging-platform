@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Models\Role;
 use Illuminate\View\View;
 
 class CreateController extends BaseController
@@ -11,6 +12,8 @@ class CreateController extends BaseController
      */
     public function __invoke(): View
     {
-        return view('admin.users.create');
+        $rolesList = Role::all();
+
+        return view('admin.users.create', compact('rolesList'));
     }
 }

@@ -15,27 +15,27 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-4">
                         <form action="{{ route('admin.user.store') }}" method="POST" class="form"
                               enctype="application/x-www-form-urlencoded">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input name="name" class="col-2 form-control" id="name" placeholder="Name" value="{{ @old('name') }}">
+                                <input name="name" class="form-control" id="name" placeholder="Name" value="{{ @old('name') }}">
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="col-2 form-control" id="email" placeholder="Email" value="{{ @old('email') }}">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ @old('email') }}">
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" class="col-2 form-control" id="password" placeholder="Password" value="{{ @old('password') }}">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="{{ @old('password') }}">
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
