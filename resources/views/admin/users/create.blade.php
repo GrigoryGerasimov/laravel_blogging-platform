@@ -34,13 +34,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="{{ @old('password') }}">
-                                @error('password')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label for="role_ids">Roles</label>
                                 <select id="role_ids" name="role_ids[]"
                                         class="select2 @error('role_ids') is-invalid @enderror" multiple="multiple"

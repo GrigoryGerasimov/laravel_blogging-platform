@@ -24,7 +24,6 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'bail|required|string',
             'email' => 'bail|required|email|unique:users',
-            'password' => 'bail|required|string',
             'role_ids' => 'bail|required|array',
             'role_ids.*' => 'bail|required|integer|exists:roles,id'
         ];
@@ -41,8 +40,6 @@ class StoreRequest extends FormRequest
             'email.required' => 'User email is mandatory',
             'email.email' => 'User email must be a valid email address',
             'email.unique' => 'User email must be unique',
-            'password.required' => 'User password is mandatory',
-            'password.string' => 'User password must be of string type',
             'role_ids.required' => 'Role(s) must be assigned to the user',
             'role_ids.array' => 'User roles collection must be an integer data array',
             'role_ids.*.required' => 'User roles collection must consist of roles',
