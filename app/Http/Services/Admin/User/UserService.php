@@ -7,6 +7,7 @@ namespace App\Http\Services\Admin\User;
 use App\Http\Services\Service;
 use App\Mail\SendRegisteredUserCredentialsMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\{DB, Hash, Log, Mail};
@@ -31,6 +32,7 @@ final class UserService extends Service
             $user->roles()->attach($userRoles);
 
             Mail::to($user->email)->send(new SendRegisteredUserCredentialsMail($user->name, $user->email, $password));
+            event(new Registered($user));
 
             DB::commit();
         } catch (\Exception $e) {
