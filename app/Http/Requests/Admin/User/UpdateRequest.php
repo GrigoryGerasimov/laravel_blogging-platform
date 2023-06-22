@@ -28,7 +28,9 @@ class UpdateRequest extends FormRequest
                 'bail', 'required', 'email',
                 Rule::unique('users')->ignore($this->route('user'))
             ],
-            'password' => 'bail|required|string'
+            'password' => 'bail|required|string',
+            'role_ids' => 'bail|required|array',
+            'role_ids.*' => 'bail|required|integer|exists:roles,id'
         ];
     }
 

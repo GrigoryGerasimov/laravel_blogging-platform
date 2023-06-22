@@ -15,28 +15,28 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-4">
                         <form action="{{ route('admin.user.update', $user) }}" method="POST" class="form"
                               enctype="application/x-www-form-urlencoded">
                             @csrf
                             @method('patch')
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input name="name" class="col-2 form-control" id="name" placeholder="Name" value="{{ @old('name') ?? $user->name }}">
+                                <input name="name" class="form-control" id="name" placeholder="Name" value="{{ @old('name') ?? $user->name }}">
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" class="col-2 form-control" id="email" placeholder="Email" value="{{ @old('email') ?? $user->email }}">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ @old('email') ?? $user->email }}">
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" class="col-2 form-control" id="password" placeholder="Password" value="{{ @old('password') ?? $user->password }}">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="{{ @old('password') ?? $user->password }}">
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -49,7 +49,7 @@
                                     @foreach($rolesList as $role)
                                         <option
                                             value="{{ $role->id }}"
-                                            {{ (is_array(old('role_ids')) && in_array($role->id, old('role_ids'))) || (is_array($post->roles->pluck('id')->toArray()) && in_array($role->id, $post->roles->pluck('id')->toArray())) ? 'selected' : '' }}
+                                            {{ (is_array(old('role_ids')) && in_array($role->id, old('role_ids'))) || (is_array($user->roles->pluck('id')->toArray()) && in_array($role->id, $user->roles->pluck('id')->toArray())) ? 'selected' : '' }}
                                         >
                                             {{ $role->name }}
                                         </option>
