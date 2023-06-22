@@ -19,9 +19,13 @@ final class UserService extends Service
 
             $userData = $request->validated();
 
+            $userRoles = $userData['role_ids'];
+            unset($userData['role_ids']);
+
             $userData['password'] = Hash::make($userData['password']);
 
-            User::firstOrCreate(['email' => $userData['email']], $userData);
+            $user = User::firstOrCreate(['email' => $userData['email']], $userData);
+            $user->roles()->attach($userRoles);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -39,9 +43,13 @@ final class UserService extends Service
 
             $updatedUserData = $request->validated();
 
+            $userRoles = $updatedUserData['role_ids'];
+            unset($updatedUserData['role_ids']);
+
             $updatedUserData['password'] = Hash::make($updatedUserData['password']);
 
             $model->update($request->validated());
+            $model->roles()->sync($userRoles);
 
             DB::commit();
 

@@ -44,7 +44,12 @@ class UpdateRequest extends FormRequest
             'email.email' => 'User email must be a valid email address',
             'email.unique' => 'User email must be unique',
             'password.required' => 'User password is mandatory',
-            'password.string' => 'User password must be of string type'
+            'password.string' => 'User password must be of string type',
+            'role_ids.required' => 'Role(s) must be assigned to the user',
+            'role_ids.array' => 'User roles collection must be an integer data array',
+            'role_ids.*.required' => 'User roles collection must consist of roles',
+            'role_ids.*.integer' => 'User role ids in roles collection must be of integer type',
+            'role_ids.*.exists' => 'User roles do not exist'
         ];
     }
 }
