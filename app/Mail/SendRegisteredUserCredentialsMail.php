@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\{Address, Content, Envelope};
 use Illuminate\Queue\SerializesModels;
 
-class SendRegisteredUserPasswordMail extends Mailable
+class SendRegisteredUserCredentialsMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -48,7 +48,7 @@ class SendRegisteredUserPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.password',
+            view: 'mail.credentials',
             with: [
                 'name' => $this->name,
                 'email' => $this->email,
