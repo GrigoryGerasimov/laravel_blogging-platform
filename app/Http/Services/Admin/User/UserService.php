@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Services\Admin\User;
 
 use App\Http\Services\Service;
+use App\Mail\SendRegisteredUserPasswordMail;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\{DB, Hash, Log};
+use Illuminate\Support\Facades\{DB, Hash, Log, Mail};
+use Illuminate\Support\Str;
 
 final class UserService extends Service
 {
@@ -22,10 +24,13 @@ final class UserService extends Service
             $userRoles = $userData['role_ids'];
             unset($userData['role_ids']);
 
-            $userData['password'] = Hash::make($userData['password']);
+            $password = Str::random(18);
+            $userData['password'] = Hash::make($password);
 
             $user = User::firstOrCreate(['email' => $userData['email']], $userData);
             $user->roles()->attach($userRoles);
+
+            Mail::to($user->email)->send(new SendRegisteredUserPasswordMail($user->name, $user->email, $password));
 
             DB::commit();
         } catch (\Exception $e) {
