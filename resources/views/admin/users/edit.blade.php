@@ -41,6 +41,24 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="role_ids">Roles</label>
+                                <select id="role_ids" name="role_ids[]"
+                                        class="select2 @error('role_ids') is-invalid @enderror" multiple="multiple"
+                                        data-placeholder="Select a Tag" style="width: 100%;">
+                                    @foreach($rolesList as $role)
+                                        <option
+                                            value="{{ $role->id }}"
+                                            {{ (is_array(old('role_ids')) && in_array($role->id, old('role_ids'))) || (is_array($post->roles->pluck('id')->toArray()) && in_array($role->id, $post->roles->pluck('id')->toArray())) ? 'selected' : '' }}
+                                        >
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('role_ids')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
 
