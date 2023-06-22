@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Notifications\SendVerificationMailWithQueueNotification;
-use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -57,8 +56,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
 
-    /*public function sendEmailVerificationNotification(): void
+    public function sendEmailVerificationNotification(): void
     {
-        $this->notify(SendVerificationMailWithQueueNotification::class);
-    }*/
+        $this->notify(new SendVerificationMailWithQueueNotification());
+    }
 }
