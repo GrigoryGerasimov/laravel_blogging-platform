@@ -16,10 +16,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.store') }}" method="POST" class="form"
+                        <form action="{{ route('admin.post.store') }}" method="POST" class="form my-3"
                               enctype="multipart/form-data">
                             @csrf
-                            <div class="col-4">
+                            <div class="col-4 p-0">
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input name="title" class="form-control @error('title') is-invalid @enderror"
@@ -91,14 +91,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-11">
+                            <div class="form-group col-11 p-0">
                                 <label for="summernote">Content</label>
                                 <textarea id="summernote" name="content">{{ old('content') }}</textarea>
                                 @error('content')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-success my-3">Create</button>
                         </form>
                     </div>
                 </div>

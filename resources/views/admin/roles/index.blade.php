@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.role.create') }}" class="btn btn-warning">New Role</a>
+                        <a href="{{ route('admin.role.create') }}" class="btn btn-outline-warning">New Role</a>
                     </div>
                 </div>
 

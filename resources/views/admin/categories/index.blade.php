@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-info">New Category</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-outline-info">New Category</a>
                     </div>
                 </div>
 

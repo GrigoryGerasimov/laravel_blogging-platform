@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.tag.create') }}" class="btn btn-danger">New Tag</a>
+                        <a href="{{ route('admin.tag.create') }}" class="btn btn-outline-danger">New Tag</a>
                     </div>
                 </div>
 
