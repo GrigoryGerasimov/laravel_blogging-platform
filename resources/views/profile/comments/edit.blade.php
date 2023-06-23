@@ -1,12 +1,12 @@
-@extends('admin.layouts.main')
+@extends('profile.layouts.main')
 
-@section('admin-content')
+@section('profile-content')
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create New Post</h1>
+                        <h1 class="m-0">{{ $post->title }}</h1>
                     </div>
                 </div>
             </div>
@@ -16,58 +16,54 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.store') }}" method="POST" class="form my-3"
+                        <form action="{{ route('admin.post.update', $post) }}" method="POST" class="form"
                               enctype="multipart/form-data">
                             @csrf
-                            <div class="col-4 p-0">
+                            @method('patch')
+
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input name="title" class="form-control @error('title') is-invalid @enderror"
                                            id="title" placeholder="Post Title"
-                                           value="{{ @old('title') }}">
+                                           value="{{ @old('title') ?? $post->title }}">
                                     @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="preview_img">Preview Image</label>
+                                    <label for="img">Preview Image</label>
                                     <div class="input-group">
+                                        @if(Storage::disk('public')->exists($post->preview_img))
+                                            <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-md"
+                                                 alt="current_preview_img"/>
+                                        @endif
                                         <div class="custom-file">
-                                            <input type="file"
-                                                   class="custom-file-input @error('preview_img') is-invalid @enderror"
-                                                   id="preview_img"
+                                            <input type="file" class="custom-file-input" id="preview_img"
                                                    name="preview_img">
                                             <label class="custom-file-label" for="preview_img">Choose file</label>
                                         </div>
                                     </div>
-                                    @error('preview_img')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="main_img">Main Image</label>
+                                    <label for="file">Main Image</label>
                                     <div class="input-group">
+                                        @if(Storage::disk('public')->exists($post->main_img))
+                                            <img src="{{ asset('storage/' . $post->main_img) }}" class="img-md"
+                                                 alt="current_main_img"/>
+                                        @endif
                                         <div class="custom-file">
-                                            <input type="file"
-                                                   class="custom-file-input @error('main_img') is-invalid @enderror"
-                                                   id="main_img" name="main_img">
+                                            <input type="file" class="custom-file-input" id="main_img" name="main_img">
                                             <label class="custom-file-label" for="main_img">Choose file</label>
                                         </div>
                                     </div>
-                                    @error('main_img')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select id="category_id" name="category_id" class="form-control">
                                         @foreach($categoriesList as $category)
                                             <option
-                                                value="{{ $category->id }}"
-                                                {{ old('category_id') === $category->id && "selected" }}
-                                            >
-                                                {{ $category->name }}
-                                            </option>
+                                                value="{{ $category->id }}" {{ (old('category_id') ?? $post->category->id == $category->id) ? "selected" : "" }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -79,7 +75,7 @@
                                         @foreach($tagsList as $tag)
                                             <option
                                                 value="{{ $tag->id }}"
-                                                {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? 'selected' : '' }}
+                                                {{ (is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids'))) || (is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}
                                             >
                                                 {{ $tag->name }}
                                             </option>
@@ -91,14 +87,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-11 p-0">
+                            <div class="form-group col-11">
                                 <label for="summernote">Content</label>
-                                <textarea id="summernote" name="content">{{ old('content') }}</textarea>
+                                <textarea id="summernote" name="content"
+                                          class="@error('content') is-invalid @enderror">{{ old('content') ?? $post->content }}</textarea>
                                 @error('content')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-success my-3">Create</button>
+
+                            <button type="submit" class="btn btn-success">Update</button>
                         </form>
                     </div>
                 </div>
@@ -106,3 +104,4 @@
         </section>
     </div>
 @endsection
+

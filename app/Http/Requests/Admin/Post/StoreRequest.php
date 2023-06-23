@@ -22,9 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|string|unique:posts',
+            'title' => 'bail|required|string|unique:comments',
             'content' => 'bail|required|string',
-            'category_id' => 'bail|required|integer|exists:categories,id',
+            'category_id' => 'bail|required|integer|exists:favourites,id',
             'preview_img' => 'bail|required|file',
             'main_img' => 'bail|required|file',
             'tag_ids' => 'bail|required|array',

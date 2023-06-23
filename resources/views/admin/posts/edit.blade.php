@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.update', $post) }}" method="POST" class="form"
+                        <form action="{{ route('admin.post.update', $post) }}" method="POST" class="form my-3"
                               enctype="multipart/form-data">
                             @csrf
                             @method('patch')
@@ -96,7 +96,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="submit" class="btn btn-success my-3">Update</button>
                         </form>
                     </div>
                 </div>

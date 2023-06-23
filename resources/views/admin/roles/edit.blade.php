@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.role.update', $role) }}" method="POST" class="form"
+                        <form action="{{ route('admin.role.update', $role) }}" method="POST" class="form my-3"
                               enctype="application/x-www-form-urlencoded">
                             @csrf
                             @method('patch')
@@ -27,7 +27,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="submit" class="btn btn-warning my-3">Update</button>
                         </form>
 
                     </div>

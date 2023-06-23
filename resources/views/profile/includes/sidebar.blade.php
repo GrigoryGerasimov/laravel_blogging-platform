@@ -2,7 +2,7 @@
     <div class="sidebar">
         <ul class="pt-3 nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item mb-4">
-                <a href="{{ route('admin.index') }}" class="nav-link">
+                <a href="{{ route('profile.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>Dashboard</p>
                 </a>
@@ -10,31 +10,25 @@
             <li class="nav-item">
                 <a href="{{ route('admin.user.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
-                    <p>Users</p>
+                    <p>Favourite Posts</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.post.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-comment-alt"></i>
-                    <p>Posts</p>
+                    <p>Comments to My Posts</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.category.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-solid fa-list"></i>
-                    <p>Categories</p>
+                    <p>My Posts</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.tag.index') }}" class="nav-link">
-                    <i class="nav-icon fa fa-solid fa-tags"></i>
-                    <p>Tags</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.role.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user-tag"></i>
-                    <p>Roles</p>
+                <a href="{{ route('admin.category.index') }}" class="nav-link">
+                    <i class="nav-icon fa fa-solid fa-list"></i>
+                    <p>My Comments</p>
                 </a>
             </li>
         </ul>

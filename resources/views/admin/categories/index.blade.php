@@ -4,14 +4,16 @@
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <a href="{{ route('admin.index') }}" class="text-dark mr-4">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Categories</li>
                         </ol>
                     </div>
                 </div>
@@ -22,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary">New Category</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-outline-info">New Category</a>
                     </div>
                 </div>
 

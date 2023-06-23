@@ -1,12 +1,12 @@
-@extends('admin.layouts.main')
+@extends('profile.layouts.main')
 
-@section('admin-content')
+@section('profile-content')
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create New Role</h1>
+                        <h1 class="m-0">Create New Category</h1>
                     </div>
                 </div>
             </div>
@@ -16,17 +16,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.role.store') }}" method="POST" class="form my-3"
+                        <form action="{{ route('admin.category.store') }}" method="POST" class="form"
                               enctype="application/x-www-form-urlencoded">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Role</label>
-                                <input name="name" class="col-2 form-control" id="name" placeholder="Role Name" value="{{ @old('name') }}">
+                                <label for="name">Category</label>
+                                <input name="name" class="col-2 form-control" id="name" placeholder="Category Name" value="{{ @old('name') }}">
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-warning my-3">Create</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                         </form>
 
                     </div>

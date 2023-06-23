@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4">
-                        <form action="{{ route('admin.user.store') }}" method="POST" class="form"
+                        <form action="{{ route('admin.user.store') }}" method="POST" class="form my-3"
                               enctype="application/x-www-form-urlencoded">
                             @csrf
                             <div class="form-group">
@@ -51,7 +51,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-primary my-3">Create</button>
                         </form>
 
                     </div>
