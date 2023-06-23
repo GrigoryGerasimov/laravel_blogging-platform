@@ -25,10 +25,10 @@ class UpdateRequest extends FormRequest
         return [
             'title' => [
                 'bail', 'required', 'string',
-                Rule::unique('posts')->ignore($this->route('post'))
+                Rule::unique('comments')->ignore($this->route('post'))
             ],
             'content' => 'bail|required|string',
-            'category_id' => 'bail|required|integer|exists:categories,id',
+            'category_id' => 'bail|required|integer|exists:favourites,id',
             'preview_img' => 'bail|nullable|file',
             'main_img' => 'bail|nullable|file',
             'tag_ids' => 'bail|required|array',

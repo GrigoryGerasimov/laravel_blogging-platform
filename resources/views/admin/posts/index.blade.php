@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.post.create') }}" class="btn btn-primary">New Post</a>
+                        <a href="{{ route('admin.post.create') }}" class="btn btn-success">New Post</a>
                     </div>
                 </div>
 

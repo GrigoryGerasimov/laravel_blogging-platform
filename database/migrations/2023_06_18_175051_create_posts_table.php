@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable(false);
             $table->longText('content')->nullable(false);
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index('category_id', 'post_category_idx');
-            $table->foreign('category_id', 'post_category_fk')->on('categories')->references('id');
+            $table->foreign('category_id', 'post_category_fk')->on('favourites')->references('id');
         });
     }
 
@@ -28,10 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function(Blueprint $table) {
+        Schema::table('comments', function(Blueprint $table) {
             $table->dropIndex('post_category_idx');
             $table->dropForeign('post_category_fk');
         });
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };

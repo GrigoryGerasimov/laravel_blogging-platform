@@ -1,6 +1,6 @@
-@extends('admin.layouts.main')
+@extends('profile.layouts.main')
 
-@section('admin-content')
+@section('profile-content')
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-info">New Category</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary">New Category</a>
                     </div>
                 </div>
 
