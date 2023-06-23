@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|string|unique:favourites'
+            'name' => 'bail|required|string|unique:categories'
         ];
     }
 

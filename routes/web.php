@@ -24,7 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function() {
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function() {
-    Route::group(['namespace' => 'Category', 'prefix' => 'favourites'], function() {
+    Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
         Route::get('/', 'IndexController')->name('admin.category.index');
         Route::get('/create', 'CreateController')->name('admin.category.create');
         Route::post('/', 'StoreController')->name('admin.category.store');
@@ -46,7 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
         Route::get('/{tag}/restore', 'RestoreController')->withTrashed()->name('admin.tag.restore');
     });
 
-    Route::group(['namespace' => 'Post', 'prefix' => 'comments'], function() {
+    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
         Route::get('/', 'IndexController')->name('admin.post.index');
         Route::get('/create', 'CreateController')->name('admin.post.create');
         Route::post('/', 'StoreController')->name('admin.post.store');
@@ -84,8 +84,29 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
     });
 });
 
+
+
+
+
+
+
+
+
+
+
 Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profile', 'middleware' => 'auth'], function () {
    Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'IndexController')->name('profile.index');
+   });
+
+   Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+       Route::get('/', 'IndexController')->name('profile.post.index');
+       Route::get('/create', 'CreateController')->name('profile.post.create');
+       Route::post('/', 'StoreController')->name('profile.post.store');
+       Route::get('/{post}', 'ShowController')->name('profile.post.show');
+       Route::get('/{post}/edit', 'EditController')->name('profile.post.edit');
+       Route::patch('/{post}', 'UpdateController')->name('profile.post.update');
+       Route::delete('/{post}', 'DestroyController')->name('profile.post.destroy');
+       Route::get('/{post}/restore', 'RestoreController')->withTrashed()->name('profile.post.restore');
    });
 });
