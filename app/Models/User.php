@@ -51,11 +51,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    /**
+     * @return BelongsToMany
+     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
 
+    /**
+     * @return void
+     */
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new SendVerificationMailWithQueueNotification());

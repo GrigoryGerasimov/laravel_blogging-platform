@@ -7,13 +7,9 @@ namespace App\Http\Services\Admin\User;
 use App\Http\Services\Service;
 use App\Jobs\UserStoreJob;
 use App\Jobs\UserUpdateJob;
-use App\Mail\SendRegisteredUserCredentialsMailWithQueue;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\{DB, Hash, Log, Mail};
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\{DB, Log};
 
 final class UserService extends Service
 {
