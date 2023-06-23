@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Services\Admin\Post;
 
 use App\Http\Services\Service;
-use App\Models\Post;
+use App\Jobs\PostStoreJob;
+use App\Jobs\PostUpdateJob;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\{DB, Log, Storage};
@@ -14,57 +15,28 @@ final class PostService extends Service
 {
     public function store(FormRequest $request): void
     {
-        try {
-            DB::beginTransaction();
+        $post = $request->validated();
 
-            $post = $request->validated();
+        $post['preview_img'] = Storage::disk('public')->put('images/preview', $post['preview_img']);
+        $post['main_img'] = Storage::disk('public')->put('images/main', $post['main_img']);
 
-            $postTags = $post['tag_ids'];
-            unset($post['tag_ids']);
-
-            $post['preview_img'] = Storage::disk('public')->put('images/preview', $post['preview_img']);
-            $post['main_img'] = Storage::disk('public')->put('images/main', $post['main_img']);
-
-            $newPost = Post::firstOrCreate($post);
-            $newPost->tags()->attach($postTags);
-
-            DB::commit();
-        } catch(\Exception $e) {
-            DB::rollBack();
-
-            Log::error($e->getMessage(), $e->getTrace());
-            abort(505);
-        }
+        dispatch(new PostStoreJob($post));
     }
 
     public function update(FormRequest $request, Model $model): Model
     {
-        try {
-            DB::beginTransaction();
+        $data = $request->validated();
 
-            $data = $request->validated();
-            $postTags = $data['tag_ids'];
-            unset($data['tag_ids']);
-
-            if (array_key_exists('preview_img', $data)) {
-                $data['preview_img'] = Storage::disk('public')->put('images/preview', $data['preview_img']);
-            }
-            if (array_key_exists('main_img', $data)) {
-                $data['main_img'] = Storage::disk('public')->put('images/main', $data['main_img']);
-            }
-
-            $model->update($data);
-            $model->tags()->sync($postTags);
-
-            DB::commit();
-
-            return $model;
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            Log::error($e->getMessage(), $e->getTrace());
-            abort(500);
+        if (array_key_exists('preview_img', $data)) {
+            $data['preview_img'] = Storage::disk('public')->put('images/preview', $data['preview_img']);
         }
+        if (array_key_exists('main_img', $data)) {
+            $data['main_img'] = Storage::disk('public')->put('images/main', $data['main_img']);
+        }
+
+        dispatch(new PostUpdateJob($model, $data));
+
+        return $model;
     }
 
     public function delete(Model $model): ?bool

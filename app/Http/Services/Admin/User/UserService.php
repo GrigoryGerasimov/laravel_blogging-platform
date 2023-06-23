@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Services\Admin\User;
 
 use App\Http\Services\Service;
+use App\Jobs\UserStoreJob;
+use App\Jobs\UserUpdateJob;
 use App\Mail\SendRegisteredUserCredentialsMailWithQueue;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -17,56 +19,18 @@ final class UserService extends Service
 {
     public function store(FormRequest $request): void
     {
-        try {
-            DB::beginTransaction();
+        $userData = $request->validated();
 
-            $userData = $request->validated();
-
-            $userRoles = $userData['role_ids'];
-            unset($userData['role_ids']);
-
-            $password = Str::random(18);
-            $userData['password'] = Hash::make($password);
-
-            $user = User::firstOrCreate(['email' => $userData['email']], $userData);
-            $user->roles()->attach($userRoles);
-
-            Mail::to($user->email)->send(new SendRegisteredUserCredentialsMailWithQueue($user->name, $user->email, $password));
-            event(new Registered($user));
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            Log::error($e->getMessage(), $e->getTrace());
-            abort(505);
-        }
+        dispatch(new UserStoreJob($userData));
     }
 
     public function update(FormRequest $request, Model $model): Model
     {
-        try {
-            DB::beginTransaction();
+        $updatedUserData = $request->validated();
 
-            $updatedUserData = $request->validated();
+        dispatch(new UserUpdateJob($model, $updatedUserData));
 
-            $userRoles = $updatedUserData['role_ids'];
-            unset($updatedUserData['role_ids']);
-
-            $updatedUserData['password'] = Hash::make($updatedUserData['password']);
-
-            $model->update($request->validated());
-            $model->roles()->sync($userRoles);
-
-            DB::commit();
-
-            return $model;
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            Log::error($e->getMessage(), $e->getTrace());
-            abort(505);
-        }
+        return $model;
     }
 
     public function delete(Model $model): ?bool
