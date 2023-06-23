@@ -9,4 +9,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class SendVerificationMailWithQueueNotification extends VerifyEmail implements ShouldQueue
 {
     use Queueable;
+
+    public function __construct()
+    {
+        $this->afterCommit();
+    }
 }

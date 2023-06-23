@@ -32,10 +32,6 @@ class SendRegisteredUserCredentialsMailWithQueue extends Mailable implements Sho
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('rehor.ger@gmail.com', 'Grigory Gerasimov'),
-            replyTo: [
-                new Address('rehor.ger@gmail.com', 'Grigory Gerasimov')
-            ],
             subject: 'Your Password to Blog Platform',
         );
     }
