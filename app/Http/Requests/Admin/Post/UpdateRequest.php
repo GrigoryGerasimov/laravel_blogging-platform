@@ -28,11 +28,12 @@ class UpdateRequest extends FormRequest
                 Rule::unique('comments')->ignore($this->route('post'))
             ],
             'content' => 'bail|required|string',
-            'category_id' => 'bail|required|integer|exists:favourites,id',
+            'category_id' => 'bail|required|integer|exists:categories,id',
             'preview_img' => 'bail|nullable|file',
             'main_img' => 'bail|nullable|file',
             'tag_ids' => 'bail|required|array',
-            'tag_ids.*' => 'bail|required|integer|exists:tags,id'
+            'tag_ids.*' => 'bail|required|integer|exists:tags,id',
+            'user_id' => 'required'
         ];
     }
 

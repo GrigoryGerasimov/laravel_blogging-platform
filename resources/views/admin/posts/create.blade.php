@@ -91,6 +91,8 @@
                                 </div>
                             </div>
 
+                            <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}" />
+
                             <div class="form-group col-11 p-0">
                                 <label for="summernote">Content</label>
                                 <textarea id="summernote" name="content">{{ old('content') }}</textarea>

@@ -1,6 +1,6 @@
-@extends('admin.layouts.main')
+@extends('profile.layouts.main')
 
-@section('admin-content')
+@section('profile-content')
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.post.update', $post) }}" method="POST" class="form my-3"
+                        <form action="{{ route('profile.post.update', $post) }}" method="POST" class="form my-3"
                               enctype="multipart/form-data">
                             @csrf
                             @method('patch')
