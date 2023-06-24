@@ -11,15 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable(false);
             $table->longText('content')->nullable(false);
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable(false);
+            $table->unsignedBigInteger('user_id')->nullable(false);
+            $table->string('preview_img')->nullable();
+            $table->string('main_img')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('category_id', 'post_category_idx');
-            $table->foreign('category_id', 'post_category_fk')->on('favourites')->references('id');
+            $table->index('user_id', 'post_user_idx');
+
+            $table->foreign('category_id', 'post_category_fk')->on('posts')->references('id');
+            $table->foreign('user_id', 'post_user_fk')->on('users')->references('id');
         });
     }
 
@@ -28,10 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('comments', function(Blueprint $table) {
+        Schema::table('posts', function(Blueprint $table) {
             $table->dropIndex('post_category_idx');
             $table->dropForeign('post_category_fk');
         });
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('posts');
     }
 };

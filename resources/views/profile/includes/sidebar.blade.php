@@ -8,8 +8,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.user.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-comment-alt"></i>
+                <a href="{{ route('profile.favourite.index') }}" class="nav-link">
+                    <i class="nav-icon far fa-heart"></i>
                     <p>Favourite Posts</p>
                 </a>
             </li>
@@ -21,7 +21,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.category.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-comments"></i>
+                    <i class="nav-icon far fa-comments"></i>
                     <p>My Comments</p>
                 </a>
             </li>
