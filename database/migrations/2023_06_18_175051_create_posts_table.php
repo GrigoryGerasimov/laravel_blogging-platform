@@ -25,7 +25,7 @@ return new class extends Migration
             $table->index('category_id', 'post_category_idx');
             $table->index('user_id', 'post_user_idx');
 
-            $table->foreign('category_id', 'post_category_fk')->on('posts')->references('id');
+            $table->foreign('category_id', 'post_category_fk')->on('categories')->references('id');
             $table->foreign('user_id', 'post_user_fk')->on('users')->references('id');
         });
     }

@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_users', function (Blueprint $table) {
+        Schema::create('favourites', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false);
             $table->unsignedBigInteger('post_id')->nullable(false);
             $table->timestamps();
 
-            $table->index('user_id', 'post_user_user_idx');
-            $table->index('post_id', 'post_user_post_idx');
+            $table->index('user_id', 'favourite_user_idx');
+            $table->index('post_id', 'favourite_post_idx');
 
-            $table->foreign('user_id', 'post_user_user_fk')->on('users')->references('id');
-            $table->foreign('post_id', 'post_user_post_fk')->on('posts')->references('id');
+            $table->foreign('user_id', 'favourite_user_fk')->on('users')->references('id');
+            $table->foreign('post_id', 'favourite_post_fk')->on('posts')->references('id');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_users');
+        Schema::dropIfExists('favourites');
     }
 };

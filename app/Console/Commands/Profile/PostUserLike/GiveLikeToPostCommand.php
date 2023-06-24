@@ -35,10 +35,9 @@ class GiveLikeToPostCommand extends Command
             $postId = $this->argument('postId');
             $userId = $this->argument('userId');
 
-            $post = Post::find($postId);
             $user = User::find($userId);
 
-            $user->likedPosts()->attach(1);
+            $user->favourites()->attach($postId);
 
             DB::commit();
 

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Profile\Favourite;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\View\View;
 
 class ShowController extends BaseController
 {
-    public function __invoke()
+    /**
+     * @param Post $favourite
+     * @return View
+     */
+    public function __invoke(Post $favourite): View
     {
-
+        return view('profile.favourites.show', compact('favourite'));
     }
 }

@@ -9,8 +9,11 @@ class IndexController extends Controller
 {
     public function __invoke(): View
     {
-        $postsCount = auth()->user()->posts->count();
+        $currentAuthUser = auth()->user();
 
-        return view('profile.main.index', compact('postsCount'));
+        $postsCount = $currentAuthUser->posts->count();
+        $favouritesCount = $currentAuthUser->favourites->count();
+
+        return view('profile.main.index', compact('postsCount', 'favouritesCount'));
     }
 }
