@@ -23,9 +23,9 @@
                                 <p>Total Favourite Posts</p>
                             </div>
                             <div class="icon">
-                                <i class="nav-icon fas fa-comment-alt"></i>
+                                <i class="nav-icon far fa-heart"></i>
                             </div>
-                            <a href="{{ route('admin.category.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('profile.favourite.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
@@ -49,7 +49,7 @@
                                 <p>My Total Comments</p>
                             </div>
                             <div class="icon">
-                                <i class="nav-icon fas fa-comments"></i>
+                                <i class="nav-icon far fa-comments"></i>
                             </div>
                             <a href="{{ route('admin.role.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>

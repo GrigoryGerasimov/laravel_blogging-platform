@@ -88,12 +88,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 
 
 
-
-
-
-
-
-
 Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profile', 'middleware' => 'auth'], function () {
    Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'IndexController')->name('profile.index');
@@ -109,4 +103,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profil
        Route::delete('/{post}', 'DestroyController')->name('profile.post.destroy');
        Route::get('/{post}/restore', 'RestoreController')->withTrashed()->name('profile.post.restore');
    });
+
+    Route::group(['namespace' => 'Favourite', 'prefix' => 'favourites'], function () {
+        Route::get('/', 'IndexController')->name('profile.favourite.index');
+        Route::get('/{post}', 'ShowController')->name('profile.favourite.show');
+        Route::get('/{post}/edit', 'EditController')->name('profile.favourite.edit');
+        Route::patch('/{post}', 'UpdateController')->name('profile.favourite.update');
+        Route::delete('/{post}', 'DestroyController')->name('profile.favourite.destroy');
+    });
 });
