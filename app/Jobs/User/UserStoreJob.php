@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\User;
 
 use App\Mail\SendRegisteredUserCredentialsMailWithQueue;
 use App\Models\User;

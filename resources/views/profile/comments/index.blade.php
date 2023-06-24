@@ -6,14 +6,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="{{ route('admin.index') }}" class="text-dark mr-4">
+                        <a href="{{ route('profile.index') }}" class="text-dark mr-4">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Posts</li>
+                            <li class="breadcrumb-item"><a href="{{ route('profile.index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Comments</li>
                         </ol>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <a href="{{ route('admin.post.create') }}" class="btn btn-primary">New Post</a>
+                        <a href="{{ route('profile.comment.create') }}" class="btn btn-outline-warning">New Comment</a>
                     </div>
                 </div>
 
@@ -32,11 +32,11 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Posts</h3>
+                                <h3 class="card-title">Comments</h3>
                             </div>
 
-                            @if(!isset($postsList) || $postsList->isEmpty())
-                                <span class="p-3">No posts available</span>
+                            @if(!isset($commentsList) || $commentsList->isEmpty())
+                                <span class="p-3">No comments available</span>
                             @else
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap">
@@ -49,24 +49,24 @@
                                         </thead>
                                         <tbody>
 
-                                        @foreach($postsList as $post)
+                                        @foreach($commentsList as $comment)
                                             <tr>
-                                                <td>{{ $post->id }}</td>
-                                                <td>{{ $post->title }}</td>
+                                                <td>{{ $comment->id }}</td>
+                                                <td>{{ $comment->content }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.post.show', $post) }}"
+                                                    <a href="{{ route('profile.comment.show', $comment) }}"
                                                        class="text-dark">
                                                         <i class="fa fa-solid fa-file"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.post.edit', $post) }}"
+                                                    <a href="{{ route('profile.comment.edit', $comment) }}"
                                                        class="text-dark">
                                                         <i role="button" class="fa fa-solid fa-pen"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('admin.post.destroy', $post) }}" method="POST"
+                                                    <form action="{{ route('profile.comment.destroy', $comment) }}" method="POST"
                                                           enctype="application/x-www-form-urlencoded" class="text-dark">
                                                         @csrf
                                                         @method('delete')

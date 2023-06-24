@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\User;
 
 use App\Mail\{SendUpdatedUserLoginMailWithQueue, SendUpdatedUserPasswordMailWithQueue};
 use Illuminate\Bus\Queueable;

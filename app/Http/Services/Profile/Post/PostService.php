@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Services\Profile\Post;
 
 use App\Http\Services\Service;
-use App\Jobs\PostStoreJob;
-use App\Jobs\PostUpdateJob;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Jobs\Post\PostStoreJob;
+use App\Jobs\Post\PostUpdateJob;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\{DB, Log, Storage};
 
 final class PostService extends Service
@@ -46,10 +46,10 @@ final class PostService extends Service
 
             $isDeleted = $model->delete();
 
-            if (Storage::disk('public')->exists($model->preview_img)) {
+            if (isset($model->preview_img) && Storage::disk('public')->exists($model->preview_img)) {
                 Storage::disk('public')->delete($model->preview_img);
             }
-            if (Storage::disk('public')->exists($model->main_img)) {
+            if (isset($model->main_img) && Storage::disk('public')->exists($model->main_img)) {
                 Storage::disk('public')->delete($model->main_img);
             }
 

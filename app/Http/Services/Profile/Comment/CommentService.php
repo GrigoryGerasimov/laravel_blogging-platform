@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Services\Admin\User;
+namespace App\Http\Services\Profile\Comment;
 
 use App\Http\Services\Service;
-use App\Jobs\User\UserStoreJob;
-use App\Jobs\User\UserUpdateJob;
+use App\Jobs\Comment\CommentStoreJob;
+use App\Jobs\Comment\CommentUpdateJob;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\{DB, Log};
 
-final class UserService extends Service
+final class CommentService extends Service
 {
     public function store(FormRequest $request): void
     {
-        $userData = $request->validated();
+        $comment = $request->validated();
 
-        dispatch(new UserStoreJob($userData));
+        dispatch(new CommentStoreJob($comment));
     }
 
     public function update(FormRequest $request, Model $model): Model
     {
-        $updatedUserData = $request->validated();
+        $updatedComment = $request->validated();
 
-        dispatch(new UserUpdateJob($model, $updatedUserData));
+        dispatch(new CommentUpdateJob($model, $updatedComment));
 
         return $model;
     }
@@ -39,7 +39,7 @@ final class UserService extends Service
             DB::commit();
 
             return $isDeleted;
-        } catch (\Exception $e) {
+        } catch(\Exception $e) {
             DB::rollBack();
 
             Log::error($e->getMessage(), $e->getTrace());
@@ -57,7 +57,7 @@ final class UserService extends Service
             DB::commit();
 
             return $isRestored;
-        } catch (\Exception $e) {
+        } catch(\Exception $e) {
             DB::rollBack();
 
             Log::error($e->getMessage(), $e->getTrace());
