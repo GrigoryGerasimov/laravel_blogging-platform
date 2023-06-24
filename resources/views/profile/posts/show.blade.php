@@ -63,7 +63,7 @@
                                     </tr>
                                     <tr>
                                         <th>Preview Image</th>
-                                        @if(Storage::disk('public')->exists($post->preview_img))
+                                        @if(!isset($post->preview_img) || Storage::disk('public')->exists($post->preview_img))
                                             <td>
                                                 <img src="{{ asset('storage/' . $post->preview_img) }}"
                                                      class="img-size-64" alt="preview_image"/>
@@ -74,7 +74,7 @@
                                     </tr>
                                     <tr>
                                         <th>Main Image</th>
-                                        @if(Storage::disk('public')->exists($post->main_img))
+                                        @if(!isset($post->main_img) || Storage::disk('public')->exists($post->main_img))
                                             <td>
                                                 <img src="{{ asset('storage/' . $post->main_img) }}" class="img-size-64"
                                                      alt="main_image"/>
