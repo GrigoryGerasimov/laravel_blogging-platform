@@ -6,9 +6,12 @@ use Illuminate\View\View;
 
 class IndexController extends BaseController
 {
+    /**
+     * @return View
+     */
     public function __invoke(): View
     {
-        $favouritesList = auth()->user()->likedPosts;
+        $favouritesList = auth()->user()->favourites;
 
         return view('profile.favourites.index', compact('favouritesList'));
     }

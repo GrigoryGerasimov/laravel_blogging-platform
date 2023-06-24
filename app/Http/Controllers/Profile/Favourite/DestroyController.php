@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Profile\Favourite;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 
 class DestroyController extends BaseController
 {
-    public function __invoke()
+    /**
+     * @param Post $favourite
+     * @return RedirectResponse
+     */
+    public function __invoke(Post $favourite): RedirectResponse
     {
+        auth()->user()->favourites()->detach($favourite->id);
 
+        return redirect()->route('profile.favourite.index');
     }
 }

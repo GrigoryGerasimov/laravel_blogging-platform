@@ -37,10 +37,9 @@ class RevokeLikeFromPostCommand extends Command
             $postId = $this->argument('postId');
             $userId = $this->argument('userId');
 
-            $post = Post::find($postId);
             $user = User::find($userId);
 
-            $user->likedPosts()->detach($post);
+            $user->favourites()->detach($postId);
 
             DB::commit();
 

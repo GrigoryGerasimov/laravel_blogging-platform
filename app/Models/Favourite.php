@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostUser extends Model
+class Favourite extends Model
 {
     use HasFactory;
 
     /**
      * @var string
      */
-    protected $table = 'post_users';
+    protected $table = 'favourites';
 
     /**
      * @var bool

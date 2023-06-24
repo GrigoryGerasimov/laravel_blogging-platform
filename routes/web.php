@@ -106,9 +106,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profil
 
     Route::group(['namespace' => 'Favourite', 'prefix' => 'favourites'], function () {
         Route::get('/', 'IndexController')->name('profile.favourite.index');
-        Route::get('/{post}', 'ShowController')->name('profile.favourite.show');
-        Route::get('/{post}/edit', 'EditController')->name('profile.favourite.edit');
-        Route::patch('/{post}', 'UpdateController')->name('profile.favourite.update');
-        Route::delete('/{post}', 'DestroyController')->name('profile.favourite.destroy');
+        Route::get('/{favourite}', 'ShowController')->name('profile.favourite.show');
+        Route::get('/{favourite}/edit', 'EditController')->name('profile.favourite.edit');
+        Route::patch('/{favourite}', 'UpdateController')->name('profile.favourite.update');
+        Route::delete('/{favourite}', 'DestroyController')->name('profile.favourite.destroy');
     });
 });
