@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label for="img">Preview Image</label>
                                     <div class="input-group">
-                                        @if(Storage::disk('public')->exists($post->preview_img))
+                                        @if(isset($post->preview_img) && Storage::disk('public')->exists($post->preview_img))
                                             <img src="{{ asset('storage/' . $post->preview_img) }}" class="img-md"
                                                  alt="current_preview_img"/>
                                         @endif
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="file">Main Image</label>
                                     <div class="input-group">
-                                        @if(Storage::disk('public')->exists($post->main_img))
+                                        @if(isset($post->main_img) && Storage::disk('public')->exists($post->main_img))
                                             <img src="{{ asset('storage/' . $post->main_img) }}" class="img-md"
                                                  alt="current_main_img"/>
                                         @endif

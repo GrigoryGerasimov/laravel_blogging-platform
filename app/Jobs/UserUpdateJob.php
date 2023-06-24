@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\{SendUpdatedUserLoginMailWithQueue, SendUpdatedUserPasswordMailWithQueue};
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class UserUpdateJob implements ShouldQueue
 {
@@ -23,7 +25,8 @@ class UserUpdateJob implements ShouldQueue
     (
         protected Model $userModel,
         protected array $userData
-    ) {
+    )
+    {
 
     }
 
@@ -37,6 +40,13 @@ class UserUpdateJob implements ShouldQueue
 
             $userRoles = $this->userData['role_ids'];
             unset($this->userData['role_ids']);
+
+            if ($this->userData['password'] !== $this->userModel->password) {
+                Mail::to($this->userData['email'])->send((new SendUpdatedUserPasswordMailWithQueue($this->userModel->name, $this->userData['password']))->afterCommit());
+            }
+            if ($this->userData['email'] !== $this->userModel->email) {
+                Mail::to($this->userData['email'])->send((new SendUpdatedUserLoginMailWithQueue($this->userModel->name, $this->userData['email']))->afterCommit());
+            }
 
             $this->userData['password'] = Hash::make($this->userData['password']);
 

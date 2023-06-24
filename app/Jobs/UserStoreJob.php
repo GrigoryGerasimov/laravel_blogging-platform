@@ -51,7 +51,7 @@ class UserStoreJob implements ShouldQueue
             $user = User::firstOrCreate(['email' => $this->userData['email']], $this->userData);
             $user->roles()->attach($userRoles);
 
-            Mail::to($user->email)->send(new SendRegisteredUserCredentialsMailWithQueue($user->name, $user->email, $password));
+            Mail::to($user->email)->send((new SendRegisteredUserCredentialsMailWithQueue($user->name, $user->email, $password))->afterCommit());
             event(new Registered($user));
 
             DB::commit();
