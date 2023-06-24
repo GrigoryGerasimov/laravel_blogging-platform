@@ -13,7 +13,8 @@ class IndexController extends Controller
 
         $postsCount = $currentAuthUser->posts->count();
         $favouritesCount = $currentAuthUser->favourites->count();
+        $commentsCount = $currentAuthUser->comments->count();
 
-        return view('profile.main.index', compact('postsCount', 'favouritesCount'));
+        return view('profile.main.index', compact('postsCount', 'favouritesCount', 'commentsCount'));
     }
 }

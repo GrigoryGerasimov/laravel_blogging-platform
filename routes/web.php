@@ -107,4 +107,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profil
         Route::patch('/{favourite}', 'UpdateController')->name('profile.favourite.update');
         Route::delete('/{favourite}', 'DestroyController')->name('profile.favourite.destroy');
     });
+
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
+        Route::get('/', 'IndexController')->name('profile.comment.index');
+        Route::get('/create', 'CreateController')->name('profile.comment.create');
+        Route::post('/', 'StoreController')->name('profile.comment.store');
+        Route::get('/{comment}', 'ShowController')->name('profile.comment.show');
+        Route::get('/{comment}/edit', 'EditController')->name('profile.comment.edit');
+        Route::patch('/{comment}', 'UpdateController')->name('profile.comment.update');
+        Route::delete('/{comment}', 'DestroyController')->name('profile.comment.destroy');
+        Route::get('/{comment}/restore', 'RestoreController')->withTrashed()->name('profile.comment.restore');
+    });
 });

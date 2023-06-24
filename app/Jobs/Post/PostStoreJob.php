@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Post;
 
 use App\Models\Post;
 use Illuminate\Bus\Queueable;

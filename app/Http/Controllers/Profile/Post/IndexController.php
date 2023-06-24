@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Profile\Post;
 
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(): View
     {
