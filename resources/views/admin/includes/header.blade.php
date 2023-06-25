@@ -10,6 +10,11 @@
                 <i class="nav-icon fas fa-user"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('post.index') }}" role="button">
+                <i class="nav-icon fas fa-door-open"></i>
+            </a>
+        </li>
     </ul>
     <form action="{{ route('logout') }}" method="POST" enctype="application/x-www-form-urlencoded">
         @csrf

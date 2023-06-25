@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\BelongsToMany, SoftDeletes};
+use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany, SoftDeletes};
 
 class Post extends Model
 {
@@ -43,8 +43,19 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function likedByUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'favourites', 'post_id', 'user_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 }

@@ -7,7 +7,7 @@
         <i>Comment to Post {{ $comment->post->id }} {{ $comment->post->title }}</i>
     </p>
     <p>
-        <i>{{ strip_tags($comment->content) }}</i>
+        <i>{!! $comment->content !!}</i>
     </p>
     <p>
         <i>Left by user {{ $comment->user->name }} at {{ $comment->created_at }}</i>
