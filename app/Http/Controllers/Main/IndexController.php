@@ -14,15 +14,17 @@ class IndexController extends Controller
      */
     public function __invoke(): View
     {
-        $postsList = Post::paginate(3)->through(function ($post) {
+        $paginatedPostsList = Post::paginate(3)->through(function ($post) {
             $post->created_at_formatted = Carbon::parse($post->created_at)->format('F d, H:i');
             return $post;
         });
+
+        $randomPostsList = Post::all()->random(6);
 
         $topPostsList = Post::withCount('likedByUsers')->orderBy('liked_by_users_count', 'DESC')->take(5)->get();
 
         $mostCommentedPostsList = Post::withCount('comments')->orderBy('comments_count', 'DESC')->take(5)->get();
 
-        return view('main.index', compact('postsList', 'topPostsList', 'mostCommentedPostsList'));
+        return view('main.index', compact('paginatedPostsList', 'randomPostsList', 'topPostsList', 'mostCommentedPostsList'));
     }
 }

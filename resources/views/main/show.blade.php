@@ -18,13 +18,25 @@
                         {!! $post->content !!}
                     </div>
                 </div>
-                @if(isset($post->main_img) && Storage::disk('public')->exists($post->main_img))
-                    <div class="row mb-5">
+                <div class="row mb-5">
+                    @if(isset($post->main_img) && Storage::disk('public')->exists($post->main_img))
                         <div class="col-md-4 mb-3" data-aos="fade-right">
-                            <img src="{{ asset('storage/' . $post->main_img) }}" alt="blog post" class="img-fluid">
+                            <img src="{{ asset('storage/' . $post->main_img) }}" alt="main image" class="img-fluid">
                         </div>
-                    </div>
-                @endif
+                    @endif
+                    @if(isset($post->suppl_prim_img) && Storage::disk('public')->exists($post->suppl_prim_img))
+                        <div class="col-md-4 mb-3" data-aos="fade-right">
+                            <img src="{{ asset('storage/' . $post->suppl_prim_img) }}"
+                                 alt="supplementary primary image" class="img-fluid">
+                        </div>
+                    @endif
+                    @if(isset($post->suppl_sec_img) && Storage::disk('public')->exists($post->suppl_sec_img))
+                        <div class="col-md-4 mb-3" data-aos="fade-right">
+                            <img src="{{ asset('storage/' . $post->suppl_sec_img) }}"
+                                 alt="supplementary secondary image" class="img-fluid">
+                        </div>
+                    @endif
+                </div>
                 <div class="row">
                     <div class="col-lg-9 mx-auto">
                         <blockquote data-aos="fade-up">
@@ -37,23 +49,22 @@
             <div class="row">
                 <div class="col-lg-9 mx-auto">
                     <section class="related-posts">
-                        <h2 class="section-title mb-4" data-aos="fade-up">Related Posts</h2>
-                        <div class="row">
-                            @if(!isset($relatedPosts) || $relatedPosts->isEmpty())
-                                <p>No related posts identified</p>
-                            @endif
-                            @foreach($relatedPosts as $relatedPost)
-                                <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
-                                    @if(isset($relatedPost->preview_img) && Storage::disk('public')->exists($relatedPost->preview_img))
-                                        <img src="{{ asset('storage/' . $relatedPost->preview_img) }}"
-                                             alt="related post"
-                                             class="post-thumbnail">
-                                    @endif
-                                    <p class="post-category">{{ $relatedPost->category->name }}</p>
-                                    <h5 class="post-title">{{ $relatedPost->title }}</h5>
-                                </div>
-                            @endforeach
-                        </div>
+                        @if(isset($relatedPosts) && $relatedPosts->isNotEmpty())
+                            <h2 class="section-title mb-4" data-aos="fade-up">Related Posts</h2>
+                            <div class="row">
+                                @foreach($relatedPosts as $relatedPost)
+                                    <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
+                                        @if(isset($relatedPost->preview_img) && Storage::disk('public')->exists($relatedPost->preview_img))
+                                            <img src="{{ asset('storage/' . $relatedPost->preview_img) }}"
+                                                 alt="related post image"
+                                                 class="post-thumbnail">
+                                        @endif
+                                        <p class="post-category">{{ $relatedPost->category->name }}</p>
+                                        <h5 class="post-title">{{ $relatedPost->title }}</h5>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </section>
                     <section class="mb-5">
                         <h2 class="section-title mb-4" data-aos="fade-up">{{ $post->comments->count() }} Comments</h2>
@@ -70,7 +81,8 @@
                         @endforeach
                     </section>
                     <section class="comment-section">
-                        <form action="{{ route('post.comment.store', $post) }}" method="post" enctype="application/x-www-form-urlencoded">
+                        <form action="{{ route('post.comment.store', $post) }}" method="post"
+                              enctype="application/x-www-form-urlencoded">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-12" data-aos="fade-up">

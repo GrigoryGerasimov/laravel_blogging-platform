@@ -84,6 +84,28 @@
                                         @endif
                                     </tr>
                                     <tr>
+                                        <th>Supplementary Primary Image</th>
+                                        @if(!isset($favourite->suppl_prim_img) || Storage::disk('public')->exists($favourite->suppl_prim_img))
+                                            <td>
+                                                <img src="{{ asset('storage/' . $favourite->suppl_prim_img) }}" class="img-size-64"
+                                                     alt="main_image"/>
+                                            </td>
+                                        @else
+                                            <td>No image available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <th>Supplementary Secondary Image</th>
+                                        @if(!isset($favourite->suppl_sec_img) || Storage::disk('public')->exists($favourite->suppl_sec_img))
+                                            <td>
+                                                <img src="{{ asset('storage/' . $favourite->suppl_sec_img) }}" class="img-size-64"
+                                                     alt="main_image"/>
+                                            </td>
+                                        @else
+                                            <td>No image available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
                                         <th>Created At</th>
                                         <td>{{ $favourite->created_at }}</td>
                                     </tr>
