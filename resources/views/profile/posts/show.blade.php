@@ -63,7 +63,7 @@
                                     </tr>
                                     <tr>
                                         <th>Preview Image</th>
-                                        @if(!isset($post->preview_img) || Storage::disk('public')->exists($post->preview_img))
+                                        @if(isset($post->preview_img) && Storage::disk('public')->exists($post->preview_img))
                                             <td>
                                                 <img src="{{ asset('storage/' . $post->preview_img) }}"
                                                      class="img-size-64" alt="preview_image"/>
@@ -74,10 +74,32 @@
                                     </tr>
                                     <tr>
                                         <th>Main Image</th>
-                                        @if(!isset($post->main_img) || Storage::disk('public')->exists($post->main_img))
+                                        @if(isset($post->main_img) && Storage::disk('public')->exists($post->main_img))
                                             <td>
                                                 <img src="{{ asset('storage/' . $post->main_img) }}" class="img-size-64"
                                                      alt="main_image"/>
+                                            </td>
+                                        @else
+                                            <td>No image available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <th>Supplementary Primary Image</th>
+                                        @if(isset($post->suppl_prim_img) && Storage::disk('public')->exists($post->suppl_prim_img))
+                                            <td>
+                                                <img src="{{ asset('storage/' . $post->suppl_prim_img) }}" class="img-size-64"
+                                                     alt="suppl_prim_img"/>
+                                            </td>
+                                        @else
+                                            <td>No image available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <th>Supplementary Secondary Image</th>
+                                        @if(isset($post->suppl_sec_img) && Storage::disk('public')->exists($post->suppl_sec_img))
+                                            <td>
+                                                <img src="{{ asset('storage/' . $post->suppl_sec_img) }}" class="img-size-64"
+                                                     alt="suppl_sec_img"/>
                                             </td>
                                         @else
                                             <td>No image available</td>

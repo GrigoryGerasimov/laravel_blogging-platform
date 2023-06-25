@@ -59,6 +59,32 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="file">Supplementary Primary Image</label>
+                                    <div class="input-group">
+                                        @if(isset($favourite->suppl_prim_img) && Storage::disk('public')->exists($favourite->suppl_prim_img))
+                                            <img src="{{ asset('storage/' . $favourite->suppl_prim_img) }}" class="img-md"
+                                                 alt="current_main_img"/>
+                                        @endif
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="suppl_prim_img" name="suppl_prim_img">
+                                            <label class="custom-file-label" for="suppl_prim_img">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="file">Supplementary Secondary Image</label>
+                                    <div class="input-group">
+                                        @if(isset($favourite->suppl_sec_img) && Storage::disk('public')->exists($favourite->suppl_sec_img))
+                                            <img src="{{ asset('storage/' . $favourite->suppl_sec_img) }}" class="img-md"
+                                                 alt="current_main_img"/>
+                                        @endif
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="suppl_sec_img" name="suppl_sec_img">
+                                            <label class="custom-file-label" for="suppl_sec_img">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select id="category_id" name="category_id" class="form-control">
                                         @foreach($categoriesList as $category)
