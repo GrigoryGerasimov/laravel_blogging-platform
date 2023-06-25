@@ -14,7 +14,7 @@ class IndexController extends Controller
      */
     public function __invoke(): View
     {
-        $postsList = Post::all()->map(function ($post) {
+        $postsList = Post::paginate(3)->through(function ($post) {
             $post->created_at_formatted = Carbon::parse($post->created_at)->format('F d, H:i');
             return $post;
         });
