@@ -17,24 +17,48 @@
 <header class="edica-header">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="Edica"></a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="{{ route('post.index') }}"><img src="{{ asset('assets/images/logo.svg') }}"
+                                                                          alt="Blog"></a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="edicaMainNav">
-                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog<span class="sr-only">(current)</span></a>
-                        <div class="dropdown-menu" aria-labelledby="blogDropdown">
-                            <a class="dropdown-item" href="blog.html">Blog Archive</a>
-                            <a class="dropdown-item" href="blog-single.html">Blog Post</a>
-                        </div>
+                <ul class="navbar-nav w-100 mx-auto mt-2 mt-lg-0 d-flex justify-content-between">
+                    <li class="nav-item ml-auto">
+                        <a class="nav-link" href="{{ route('post.index') }}">Blog<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.index') }}">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile.index') }}">Profile</a>
+                    <li class="nav-item ml-auto">
+                        <ul class="navbar-nav">
+                            @can('admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.index') }}">
+                                        <i class="nav-icon fas fa-user-cog"></i>
+                                    </a>
+                                </li>
+                            @endcan
+                            @auth()
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('profile.index') }}">
+                                        <i class="nav-icon fas fa-user"></i>
+                                    </a>
+                                </li>
+                                <form action="{{ route('logout') }}" method="POST"
+                                      enctype="application/x-www-form-urlencoded">
+                                    @csrf
+                                    <button type="submit" class="btn border-0 bg-transparent">
+                                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    </button>
+                                </form>
+                            @endauth
+                            @guest()
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">
+                                        <i class="nav-icon fas fa-sign-in-alt"></i>
+                                    </a>
+                                </li>
+                            @endguest
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -49,10 +73,15 @@
         <div class="footer-banner" data-aos="fade-up">
             <h1 class="banner-title">Download it now.</h1>
             <div class="banner-btns-wrapper">
-                <button class="btn btn-success"> <img src="{{ asset('assets/images/apple@1x.svg') }}" alt="ios" class="mr-2"> App Store</button>
-                <button class="btn btn-success"> <img src="{{ asset('assets/images/android@1x.svg') }}" alt="android" class="mr-2"> Google Play</button>
+                <button class="btn btn-success"><img src="{{ asset('assets/images/apple@1x.svg') }}" alt="ios"
+                                                     class="mr-2"> App Store
+                </button>
+                <button class="btn btn-success"><img src="{{ asset('assets/images/android@1x.svg') }}" alt="android"
+                                                     class="mr-2"> Google Play
+                </button>
             </div>
-            <p class="banner-text">Add some helper text here to explain the finer details of your <br> product or service.</p>
+            <p class="banner-text">Add some helper text here to explain the finer details of your <br> product or
+                service.</p>
         </div>
     </div>
 </section>
@@ -94,8 +123,10 @@
             </div>
             <div class="col-md-3">
                 <div class="dropdown footer-country-dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="footerCountryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="flag-icon flag-icon-gb flag-icon-squared"></span> United Kingdom <i class="fas fa-chevron-down ml-2"></i>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="footerCountryDropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="flag-icon flag-icon-gb flag-icon-squared"></span> United Kingdom <i
+                            class="fas fa-chevron-down ml-2"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="footerCountryDropdown">
                         <button class="dropdown-item" href="#">
