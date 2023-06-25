@@ -11,18 +11,19 @@
                     @endif
 
                     @foreach($postsList as $post)
-                        <div class="col-md-4 fetured-post blog-post" data-aos="fade-right">
+                        <div class="col-md-4 featured-post blog-post" data-aos="fade-right">
                             <div class="blog-post-thumbnail-wrapper">
                                 <img src="{{ asset('storage/' . $post->preview_img) }}" alt="blog post">
                             </div>
                             <p class="blog-post-category">{{ $post->category->name }}</p>
-                            <a href="{{ route('admin.post.show', $post) }}" class="blog-post-permalink">
+                            <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
                                 <h6 class="blog-post-title">{{ $post->title }}</h6>
                             </a>
                             <p class="blog-post-category mt-2">By {{ $post->user->name }} on {{ $post->created_at_formatted }}</p>
                         </div>
                     @endforeach
                 </div>
+                {{ $postsList->links() }}
             </section>
             <div class="row">
                 <div class="col-md-8">
@@ -33,12 +34,12 @@
                             @endif
 
                             @foreach($postsList as $post)
-                                <div class="col-md-4 fetured-post blog-post" data-aos="fade-right">
+                                <div class="col-md-4 featured-post blog-post" data-aos="fade-right">
                                     <div class="blog-post-thumbnail-wrapper">
                                         <img src="{{ asset('storage/' . $post->preview_img) }}" alt="blog post">
                                     </div>
                                     <p class="blog-post-category">{{ $post->category->name }}</p>
-                                    <a href="{{ route('admin.post.show', $post) }}" class="blog-post-permalink">
+                                    <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
                                         <h6 class="blog-post-title">{{ $post->title }}</h6>
                                     </a>
                                     <p class="blog-post-category mt-2">By {{ $post->user->name }} on {{ $post->created_at_formatted }}</p>
@@ -57,7 +58,7 @@
 
                             @foreach($topPostsList as $topPost)
                                     <li class="post">
-                                        <a href="{{ route('admin.post.show', $topPost) }}" class="post-permalink media">
+                                        <a href="{{ route('post.show', $topPost) }}" class="post-permalink media">
                                             <img src="{{ asset('storage/' . $topPost->preview_img) }}" alt="blog post">
                                             <div class="media-body">
                                                 <h6 class="post-title">{{ $topPost->title }}</h6>
@@ -76,7 +77,7 @@
 
                             @foreach($mostCommentedPostsList as $mostCommentedPost)
                                 <li class="post">
-                                    <a href="{{ route('admin.post.show', $mostCommentedPost) }}" class="post-permalink media">
+                                    <a href="{{ route('post.show', $mostCommentedPost) }}" class="post-permalink media">
                                         <img src="{{ asset('storage/' . $mostCommentedPost->preview_img) }}" alt="blog post">
                                         <div class="media-body">
                                             <h6 class="post-title">{{ $mostCommentedPost->title }}</h6>
@@ -89,6 +90,5 @@
                 </div>
             </div>
         </div>
-
     </main>
 @endsection
