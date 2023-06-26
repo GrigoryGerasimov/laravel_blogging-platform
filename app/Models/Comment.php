@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, SoftDeletes};
 
@@ -33,5 +34,13 @@ class Comment extends Model
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getCreatedAtDateFormattedAttribute(): Carbon
+    {
+        return Carbon::parse($this->created_at);
     }
 }

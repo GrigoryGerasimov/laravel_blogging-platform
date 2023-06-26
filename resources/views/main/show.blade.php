@@ -4,10 +4,19 @@
     <main class="blog-post">
         <div class="container">
             <h1 class="edica-page-title" data-aos="fade-up">{{ $post->title }}</h1>
-            <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">Written by {{ $post->user->name }}
-                • {{ $post->created_at_formatted }} • {{ $post->category->name }} • {{ $post->likedByUsers->count() }}
-                Likes • {{ $post->comments->count() }}
-                Comments</p>
+            <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">
+                Written by {{ $post->user->name }}
+                <span class="mx-2">•</span>
+                {{ $post->createdAtDateFormatted }}
+                <span class="mx-2">•</span>
+                {{ $post->category->name }}
+                <span class="mx-2">•</span>
+                {{ $post->likedByUsers->count() }}
+                <i class="ml-1 nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>
+                <span class="mx-2">•</span>
+                {{ $post->comments->count() }}
+                <span class="ml-1">Comments</span>
+            </p>
             @if(isset($post->preview_img) && Storage::disk('public')->exists($post->preview_img))
                 <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
                     <img src="{{ asset('storage/' . $post->preview_img) }}" alt="featured image" class="w-100">
@@ -69,17 +78,16 @@
                     </section>
                     <section class="mb-5">
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <h2 class="section-title mb-4" data-aos="fade-up">{{ $post->comments->count() }} Comments</h2>
+                            <h2 class="section-title mb-4" data-aos="fade-up">{{ $post->comments->count() }}
+                                Comments</h2>
                             <div class="d-flex justify-content-between align-items-baseline">
                                 <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
-                                <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                <form action="{{ route('post.favourite.store', $post) }}" method="POST"
+                                      enctype="application/x-www-form-urlencoded">
                                     @csrf
-                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
-                                        @if($post->likedByUsers->contains(auth()->user()->id))
-                                            Liked
-                                        @else
-                                            Like
-                                        @endif
+                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent"
+                                            @guest() disabled @endguest>
+                                        <i class="nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>
                                     </button>
                                 </form>
                             </div>
@@ -89,8 +97,9 @@
                                 <div class="d-flex justify-content-between">
                                     <h6>{{ $comment->user->name }}</h6>
                                     <div class="d-flex justify-content-between">
-                                        <p class="mr-3">{{ $comment->created_at_formatted->diffForHumans() }}</p>
-                                        <form action="{{ route('post.comment.destroy', [$post, $comment]) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <p class="mr-3">{{ $comment->createdAtDateFormatted->diffForHumans() }}</p>
+                                        <form action="{{ route('post.comment.destroy', [$post, $comment]) }}"
+                                              method="POST" enctype="application/x-www-form-urlencoded">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="border-0 bg-transparent">
@@ -105,26 +114,28 @@
                             </div>
                         @endforeach
                     </section>
-                    <section class="comment-section">
-                        <form action="{{ route('post.comment.store', $post) }}" method="post"
-                              enctype="application/x-www-form-urlencoded">
-                            @csrf
-                            <div class="row">
-                                <div class="form-group col-12" data-aos="fade-up">
-                                    <label for="content" class="sr-only">Comment</label>
-                                    <textarea name="content" id="content" class="form-control" placeholder="Comment"
-                                              rows="10">Comment</textarea>
+                    @auth()
+                        <section class="comment-section">
+                            <form action="{{ route('post.comment.store', $post) }}" method="post"
+                                  enctype="application/x-www-form-urlencoded">
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col-12" data-aos="fade-up">
+                                        <label for="content" class="sr-only">Comment</label>
+                                        <textarea name="content" id="content" class="form-control" placeholder="Comment"
+                                                  rows="10">Comment</textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}"/>
-                            <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}"/>
-                            <div class="row">
-                                <div class="col-12" data-aos="fade-up">
-                                    <input type="submit" value="Send Message" class="btn btn-warning">
+                                <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}"/>
+                                <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}"/>
+                                <div class="row">
+                                    <div class="col-12" data-aos="fade-up">
+                                        <input type="submit" value="Send Message" class="btn btn-warning">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </section>
+                            </form>
+                        </section>
+                    @endauth
                 </div>
             </div>
         </div>

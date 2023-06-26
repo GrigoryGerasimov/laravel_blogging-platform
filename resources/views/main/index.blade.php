@@ -16,23 +16,23 @@
                                     <p class="blog-post-category">{{ $post->category->name }}</p>
                                     <div class="d-flex justify-content-between align-items-baseline">
                                         <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
-                                        <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <form action="{{ route('post.favourite.store', $post) }}" method="POST"
+                                              enctype="application/x-www-form-urlencoded">
                                             @csrf
-                                            <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
-                                                @if($post->likedByUsers->contains(auth()->user()->id))
-                                                    Liked
-                                                @else
-                                                    Like
-                                                @endif
+                                            <button type="submit" class="btn border-0 m-0 p-0 bg-transparent"
+                                                    @guest() disabled @endguest>
+                                                <i class="nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>
                                             </button>
                                         </form>
                                     </div>
                                 </div>
                                 <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
-                                    <h6 class="blog-post-title">{{ $post->title }}</h6>
+                                    <h6 class="my-3 blog-post-title">{{ $post->title }}</h6>
                                 </a>
-                                <p class="blog-post-category mt-2">By {{ $post->user->name }}
-                                    on {{ $post->created_at_formatted }}</p>
+                                <div class="text-right">
+                                    <small class="mt-2">By {{ $post->user->name }}
+                                        on {{ $post->createdAtDateFormatted }}</small>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -53,23 +53,23 @@
                                             <p class="blog-post-category">{{ $post->category->name }}</p>
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
-                                                <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                                <form action="{{ route('post.favourite.store', $post) }}" method="POST"
+                                                      enctype="application/x-www-form-urlencoded">
                                                     @csrf
-                                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
-                                                        @if($post->likedByUsers->contains(auth()->user()->id))
-                                                            Liked
-                                                        @else
-                                                            Like
-                                                        @endif
+                                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent"
+                                                            @guest() disabled @endguest>
+                                                        <i class="nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
                                         <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
-                                            <h6 class="blog-post-title">{{ $post->title }}</h6>
+                                            <h6 class="my-3 blog-post-title">{{ $post->title }}</h6>
                                         </a>
-                                        <p class="blog-post-category mt-2">By {{ $post->user->name }}
-                                            on {{ $post->created_at_formatted }}</p>
+                                        <div class="text-right">
+                                            <small class="mt-2">By {{ $post->user->name }}
+                                                on {{ $post->createdAtDateFormatted }}</small>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
