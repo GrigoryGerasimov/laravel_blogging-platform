@@ -5,7 +5,8 @@
         <div class="container">
             <h1 class="edica-page-title" data-aos="fade-up">{{ $post->title }}</h1>
             <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">Written by {{ $post->user->name }}
-                • {{ $post->created_at_formatted }} • {{ $post->category->name }} • {{ $post->comments->count() }}
+                • {{ $post->created_at_formatted }} • {{ $post->category->name }} • {{ $post->likedByUsers->count() }}
+                Likes • {{ $post->comments->count() }}
                 Comments</p>
             @if(isset($post->preview_img) && Storage::disk('public')->exists($post->preview_img))
                 <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
@@ -67,12 +68,36 @@
                         @endif
                     </section>
                     <section class="mb-5">
-                        <h2 class="section-title mb-4" data-aos="fade-up">{{ $post->comments->count() }} Comments</h2>
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h2 class="section-title mb-4" data-aos="fade-up">{{ $post->comments->count() }} Comments</h2>
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
+                                <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                    @csrf
+                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
+                                        @if($post->likedByUsers->contains(auth()->user()->id))
+                                            Liked
+                                        @else
+                                            Like
+                                        @endif
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                         @foreach($post->comments as $comment)
                             <div class="mb-3 p-4" style="background-color: #f6f6f6">
                                 <div class="d-flex justify-content-between">
                                     <h6>{{ $comment->user->name }}</h6>
-                                    <p>{{ $comment->created_at_formatted->diffForHumans() }}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>{{ $comment->created_at_formatted->diffForHumans() }}</p>
+                                        <form action="{{ route('post.comment.destroy') }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="border-0 bg-transparent">
+                                                <i role="button" class="fa fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div>
                                     {!! $comment->content !!}

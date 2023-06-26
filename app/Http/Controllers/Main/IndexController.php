@@ -21,9 +21,9 @@ class IndexController extends Controller
 
         $randomPostsList = Post::all()->random(6);
 
-        $topPostsList = Post::withCount('likedByUsers')->orderBy('liked_by_users_count', 'DESC')->take(5)->get();
+        $topPostsList = Post::orderBy('liked_by_users_count', 'DESC')->take(5)->get();
 
-        $mostCommentedPostsList = Post::withCount('comments')->orderBy('comments_count', 'DESC')->take(5)->get();
+        $mostCommentedPostsList = Post::orderBy('comments_count', 'DESC')->take(5)->get();
 
         return view('main.index', compact('paginatedPostsList', 'randomPostsList', 'topPostsList', 'mostCommentedPostsList'));
     }
