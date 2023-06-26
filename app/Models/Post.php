@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany, SoftDeletes};
 
@@ -62,5 +63,13 @@ class Post extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedAtDateFormattedAttribute(): string
+    {
+        return Carbon::parse($this->created_at)->format('F d, H:i');
     }
 }
