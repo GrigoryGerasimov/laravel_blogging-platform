@@ -12,7 +12,22 @@
                                 <div class="blog-post-thumbnail-wrapper">
                                     <img src="{{ asset('storage/' . $post->preview_img) }}" alt="preview image">
                                 </div>
-                                <p class="blog-post-category">{{ $post->category->name }}</p>
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <p class="blog-post-category">{{ $post->category->name }}</p>
+                                    <div class="d-flex justify-content-between align-items-baseline">
+                                        <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
+                                        <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                            @csrf
+                                            <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
+                                                @if($post->likedByUsers->contains(auth()->user()->id))
+                                                    Liked
+                                                @else
+                                                    Like
+                                                @endif
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                                 <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
                                     <h6 class="blog-post-title">{{ $post->title }}</h6>
                                 </a>
@@ -34,7 +49,22 @@
                                         <div class="blog-post-thumbnail-wrapper">
                                             <img src="{{ asset('storage/' . $post->preview_img) }}" alt="preview image">
                                         </div>
-                                        <p class="blog-post-category">{{ $post->category->name }}</p>
+                                        <div class="d-flex justify-content-between align-items-baseline">
+                                            <p class="blog-post-category">{{ $post->category->name }}</p>
+                                            <div class="d-flex justify-content-between align-items-baseline">
+                                                <small class="mr-3">{{ $post->likedByUsers->count() }}</small>
+                                                <form action="{{ route('post.favourite.store', $post) }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                                    @csrf
+                                                    <button type="submit" class="btn border-0 m-0 p-0 bg-transparent @guest() disabled @endguest">
+                                                        @if($post->likedByUsers->contains(auth()->user()->id))
+                                                            Liked
+                                                        @else
+                                                            Like
+                                                        @endif
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                         <a href="{{ route('post.show', $post) }}" class="blog-post-permalink">
                                             <h6 class="blog-post-title">{{ $post->title }}</h6>
                                         </a>

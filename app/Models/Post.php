@@ -20,6 +20,11 @@ class Post extends Model
     protected $guarded = false;
 
     /**
+     * @var string[]
+     */
+    protected $withCount = ['likedByUsers', 'comments'];
+
+    /**
      * @return BelongsTo
      */
     public function category(): BelongsTo
