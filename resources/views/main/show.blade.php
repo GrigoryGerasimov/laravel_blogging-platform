@@ -89,8 +89,8 @@
                                 <div class="d-flex justify-content-between">
                                     <h6>{{ $comment->user->name }}</h6>
                                     <div class="d-flex justify-content-between">
-                                        <p>{{ $comment->created_at_formatted->diffForHumans() }}</p>
-                                        <form action="{{ route('post.comment.destroy') }}" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <p class="mr-3">{{ $comment->created_at_formatted->diffForHumans() }}</p>
+                                        <form action="{{ route('post.comment.destroy', [$post, $comment]) }}" method="POST" enctype="application/x-www-form-urlencoded">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="border-0 bg-transparent">

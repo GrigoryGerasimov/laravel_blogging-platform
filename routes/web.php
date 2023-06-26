@@ -22,7 +22,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Main', 'prefix' => 'blog'], f
     Route::get('/{post}', 'ShowController')->name('post.show');
     Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function () {
         Route::post('/', 'StoreController')->name('post.comment.store');
-        Route::delete('/', 'DestroyController')->name('post.comment.destroy');
+        Route::group(['prefix' => '/{comment}'], function () {
+            Route::delete('/', 'DestroyController')->name('post.comment.destroy');
+        });
     });
     Route::group(['namespace' => 'Favourite', 'prefix' => '{post}/favourites'], function () {
         Route::post('/', 'StoreController')->name('post.favourite.store');
