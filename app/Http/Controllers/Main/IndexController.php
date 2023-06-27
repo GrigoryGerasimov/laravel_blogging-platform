@@ -14,11 +14,11 @@ class IndexController extends Controller
      */
     public function __invoke(): View
     {
-        $paginatedPostsList = Post::paginate(3);
+        $paginatedPostsList = Post::with('likedByUsers')->paginate(3);
 
-        $randomPostsList = Post::all()->random(6);
+        $randomPostsList = Post::with('likedByUsers')->get()->random(6);
 
-        $topPostsList = Post::orderBy('liked_by_users_count', 'DESC')->take(5)->get();
+        $topPostsList = Post::with('likedByUsers')->orderBy('liked_by_users_count', 'DESC')->take(5)->get();
 
         $mostCommentedPostsList = Post::orderBy('comments_count', 'DESC')->take(5)->get();
 
