@@ -9,7 +9,7 @@
                 <span class="mx-2">•</span>
                 {{ $post->createdAtDateFormatted }}
                 <span class="mx-2">•</span>
-                {{ $post->category->name }}
+                <a class="blog-post-permalink text-decoration-none text-secondary" href="{{ route('category.show', $post->category) }}">{{ $post->category->name }}</a>
                 <span class="mx-2">•</span>
                 {{ $post->likedByUsers->count() }}
                 <i class="ml-1 nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>

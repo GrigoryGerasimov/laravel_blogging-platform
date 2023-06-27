@@ -13,7 +13,9 @@
                                     <img src="{{ asset('storage/' . $relatedPost->preview_img) }}" alt="preview image">
                                 </div>
                                 <div class="d-flex justify-content-between align-items-baseline">
-                                    <p class="blog-post-category">{{ $relatedPost->category->name }}</p>
+                                    <a class="blog-post-permalink" href="{{ route('category.show', $relatedPost->category) }}">
+                                        <p class="blog-post-category">{{ $relatedPost->category->name }}</p>
+                                    </a>
                                     <div class="d-flex justify-content-between align-items-baseline">
                                         <small class="mr-3">{{ $relatedPost->likedByUsers->count() }}</small>
                                         <form action="{{ route('post.favourite.store', $relatedPost) }}" method="POST"
