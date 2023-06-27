@@ -26,7 +26,14 @@
             <div class="collapse navbar-collapse" id="edicaMainNav">
                 <ul class="navbar-nav w-100 mx-auto mt-2 mt-lg-0 d-flex justify-content-between">
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="{{ route('post.index') }}">Blog<span class="sr-only">(current)</span></a>
+                        <ul class="navbar-nav">
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link" href="{{ route('post.index') }}">Blog<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item ml-auto">
                         <ul class="navbar-nav">
