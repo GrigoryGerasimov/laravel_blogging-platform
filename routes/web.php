@@ -31,6 +31,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Main', 'prefix' => 'blog'], f
     });
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Category', 'prefix' => 'categories'], function () {
+    Route::get('/', 'IndexController')->name('category.index');
+    Route::get('/{category}', 'ShowController')->name('category.show');
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function() {
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
         Route::get('/', 'IndexController')->name('admin.category.index');

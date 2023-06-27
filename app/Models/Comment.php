@@ -21,6 +21,11 @@ class Comment extends Model
     protected $guarded = false;
 
     /**
+     * @var string[]
+     */
+    protected $with = ['user', 'post'];
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

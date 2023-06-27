@@ -9,7 +9,7 @@
                 <span class="mx-2">•</span>
                 {{ $post->createdAtDateFormatted }}
                 <span class="mx-2">•</span>
-                {{ $post->category->name }}
+                <a class="blog-post-permalink text-decoration-none text-secondary" href="{{ route('category.show', $post->category) }}">{{ $post->category->name }}</a>
                 <span class="mx-2">•</span>
                 {{ $post->likedByUsers->count() }}
                 <i class="ml-1 nav-icon fa{{ !is_null(auth()->user()) && $post->likedByUsers->contains(auth()->user()->id) ? 's' : 'r' }} fa-heart"></i>
@@ -98,14 +98,16 @@
                                     <h6>{{ $comment->user->name }}</h6>
                                     <div class="d-flex justify-content-between">
                                         <p class="mr-3">{{ $comment->createdAtDateFormatted->diffForHumans() }}</p>
-                                        <form action="{{ route('post.comment.destroy', [$post, $comment]) }}"
-                                              method="POST" enctype="application/x-www-form-urlencoded">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="border-0 bg-transparent">
-                                                <i role="button" class="fa fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        @if(!is_null(auth()->user()) && $comment->user->id === auth()->user()->id)
+                                            <form action="{{ route('post.comment.destroy', [$post, $comment]) }}"
+                                                  method="POST" enctype="application/x-www-form-urlencoded">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="border-0 bg-transparent">
+                                                    <i role="button" class="fa fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                                 <div>

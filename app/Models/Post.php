@@ -26,6 +26,11 @@ class Post extends Model
     protected $withCount = ['likedByUsers', 'comments'];
 
     /**
+     * @var string[]
+     */
+    protected $with = ['category', 'user'];
+
+    /**
      * @return BelongsTo
      */
     public function category(): BelongsTo
